@@ -1,0 +1,141 @@
+/* GENERAL */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* TOP NAVBAR */
+.navbar-menu {
+  width: 100%;
+  background: #eacdb9;
+  position: fixed;
+  padding: 10px;
+  top: 0;
+  z-index: 999;
+}
+.navbar-menu ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+  padding-left: 5px;
+}
+.left-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.right-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.brand-title {
+  font-size: 20px;
+  color: #231103;
+  font-weight: bold;
+}
+#toggle-btn-menu, #icon-cart {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+#toggle-btn-menu i, #icon-cart i {
+  font-size: 26px;
+  color: #231103;
+}
+#search-input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid #3e2723;
+  width: 300px;
+}
+#search-btn {
+  padding: 8px 12px;
+  background: #3e2723;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+#search-btn:hover {
+  background: #bc6c25;
+}
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* SIDEBAR */
+#sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: #eacdb9;
+  overflow: auto;
+  padding-left: 10px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+#sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+#sidebar ul {
+  list-style: none;
+  padding-top: 10px;
+}
+#sidebar li {
+  margin-top: 10px;
+}
+#sidebar a, #sidebar button.dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #3e2723;
+  background: none;
+  border: none;
+  padding: 12px;
+  width: 100%;
+}
+/* MOBILE */
+@media (max-width: 680px) {
+  .navbar-menu ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .left-area {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .right-area {
+    justify-content: flex-end;
+    width: 100%;
+    margin-left: 0;
+  }
+  #search-input {
+    width: 100%;
+  }
+}

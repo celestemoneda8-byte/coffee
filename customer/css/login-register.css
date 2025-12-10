@@ -1,0 +1,164 @@
+/* ===== BODY & WRAPPER ===== */
+body {
+    margin: 0;
+    padding: 0;
+    /* Updated path: move one level up from css/ to reach images/ */
+    background-image: url('../images/coffee.jpg');
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    padding: 40px;
+    border-radius: 17px;
+    box-shadow: rgba(0,0,0,0.25) 0 8px 15px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+}
+
+/* ===== LEFT CONTAINER ===== */
+.left-container {
+    flex: 1;
+    padding: 40px;
+    text-align: left;
+}
+
+.left-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: whitesmoke;
+    margin-bottom: 15px;
+}
+
+.left-container p {
+    font-size: 1rem;
+    color: whitesmoke;
+    line-height: 1.6;
+}
+
+/* ===== FORM ===== */
+.signup-form {
+    width: 45%;
+    background: #e7d8b1;
+    color: #0a0908;
+    border-radius: 10px;
+    padding: 40px;
+    position: relative;
+}
+
+.signup-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.signup-box input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0a0908;
+    border-radius: 5px;
+    font-size: 15px;
+    background: transparent;
+    transition: 0.3s ease;
+}
+
+.signup-box label {
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    color: #0a0908;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s ease;
+    background: #e7d8b1;
+    padding: 0 5px;
+}
+
+.signup-box input:focus + label,
+.signup-box input:not(:placeholder-shown) + label {
+    transform: translateY(-20px);
+    font-size: 15px;
+}
+
+.signup-box ion-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0a0908;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    width: 100%;
+    background: #e7d8b1;
+    border: 2px solid #0a0908;
+    color: #0a0908;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    color: #e7d8b1;
+    background-color: #0a0908;
+    box-shadow: rgba(0,0,0,0.25) 0 8px 15px;
+}
+
+/* ===== REMEMBER ME + FORGOT ===== */
+.form-check-label,
+.text-decoration-none {
+    font-size: 13px !important;
+}
+
+.remember-forgot {
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+/* ===== TEXT LINKS ===== */
+.signup-box p,
+.signup-box p a {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-link,
+.login-link {
+    color: #0a0908;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link:hover,
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        width: 90%;
+        padding: 20px;
+    }
+
+    .left-container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .signup-form {
+        width: 100%;
+        margin-top: 20px;
+    }
+}

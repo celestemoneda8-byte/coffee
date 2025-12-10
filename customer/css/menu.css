@@ -1,0 +1,141 @@
+/* Remove spacing from container */
+#menu-page {
+    margin: 0;
+    padding: 0;
+    margin-top: 100px;
+}
+
+/* Fix grid-item missing styling */
+.grid-item {
+  width: 100%;
+  display: block;
+}
+
+/* Desktop grid with correct alignment */
+#coffee-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* Category filter styling */
+.filter-btn {
+  background: transparent;
+  border: 1px solid #e6d8c8;
+  color: #3b2b24;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all .18s ease;
+}
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+}
+.filter-btn.active {
+  background: #f0d9c0;
+  border-color: #d6b89d;
+  color: #2b1a12;
+}
+
+/* Visual card */
+.coffee-card {
+  width: 100%;
+  background: #fbf0de;
+  border-radius: 14px;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(41, 31, 24, 0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+  box-sizing: border-box;
+}
+.coffee-card > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Details */
+.coffee-card .ms-3 {
+  flex: 1 1 auto;
+}
+.coffee-name {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #3b2b24;
+}
+.coffee-price {
+  margin: 6px 0 10px;
+  font-weight: 700;
+  color: #5b4035;
+}
+
+/* Buttons */
+.coffee-card .btn-outline-dark {
+  border-color: #cbb7a2;
+  color: #3b2b24;
+  background: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.coffee-card .quantity {
+  min-width: 28px;
+  display: inline-block;
+  text-align: center;
+}
+.coffee-card .btn-primary {
+  background: #5b3b2e;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  color: #fff;
+}
+.coffee-card .btn-primary:hover {
+  background: #4a2f26;
+}
+.coffee-card .btn-success {
+  background: #b07a53;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  color: #fff;
+}
+.coffee-card .btn-success:hover {
+  background: #945f42;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  #coffee-list {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
+  }
+}
+@media (max-width: 900px) {
+  #coffee-list {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 720px;
+  }
+}
+@media (max-width: 600px) {
+  #coffee-list {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .coffee-card {
+    flex-direction: row;
+    padding: 12px;
+  }
+  .coffee-card > div:first-child {
+    flex: 0 0 120px;
+    max-width: 120px;
+    height: 120px;
+  }
+}

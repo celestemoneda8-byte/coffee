@@ -1,0 +1,192 @@
+:root{
+  --almond:#ede0d4;
+  --dun:#e6ccb2;
+  --tan:#ddb892;
+  --chamoisee:#b08968;
+  --coffee:#7f5539;
+  --muted:#9a8b7b;
+  --bg:#f6e9d6;
+  --card-shadow: rgba(127,85,57,0.06);
+}
+
+/* Layout */
+body.page-bg{
+  background: linear-gradient(180deg, var(--bg) 0%, #f0dcc2 50%);
+  color: var(--coffee);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  margin:0;
+  padding:0;
+}
+
+/* Container flex layout */
+.d-flex.min-vh-100 { min-height: 100vh; }
+
+/* Sidebar */
+.sidebar{
+  width: 260px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));
+  border-right: 1px solid rgba(127,85,57,0.06);
+  box-shadow: 8px 0 24px rgba(127,85,57,0.04);
+  display:flex;
+  flex-direction:column;
+  overflow:auto;
+  padding-bottom:16px;
+}
+.sidebar-top .brand{
+  font-weight:700;
+  font-size:1.4rem;
+  color:var(--coffee);
+}
+.sidebar-nav {
+  padding: 0 8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.nav-link{
+  color:var(--coffee);
+  border-radius:10px;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  opacity:0.95;
+}
+.nav-link:hover{
+  background: linear-gradient(90deg, rgba(208,145,92,0.08), rgba(220,200,180,0.04));
+  text-decoration:none;
+}
+.nav-link.active{
+  background: linear-gradient(90deg, #d9b89c, #c99f83);
+  color:#fff;
+  box-shadow: 0 8px 24px var(--card-shadow);
+}
+
+/* push logout to bottom */
+.sidebar-spacer{
+  flex:1 1 auto;
+}
+
+/* main content */
+main.flex-fill{
+  background: transparent;
+  padding-top: 28px;
+}
+
+/* page title */
+.page-title{
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--coffee);
+}
+
+/* user badge */
+.user-badge{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.user-badge .avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background: linear-gradient(180deg, rgba(124,76,52,0.1), rgba(124,76,52,0.06));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:var(--coffee);
+}
+
+/* KPI card */
+.overview-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+  border-radius:12px;
+  border:1px solid rgba(127,85,57,0.06);
+  box-shadow: 0 8px 28px var(--card-shadow);
+  min-height:110px;
+}
+.icon-wrap{
+  width:52px;
+  height:52px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+  color:var(--coffee);
+  background: linear-gradient(180deg, rgba(220,210,193,0.6), rgba(220,210,193,0.35));
+}
+
+/* titles/values */
+.overview-title{ font-size:0.85rem; color:var(--muted); font-weight:700; letter-spacing:0.6px; text-transform:uppercase; }
+.overview-value{ font-size:1.5rem; font-weight:800; margin-top:8px; color:var(--coffee); }
+
+/* info card */
+.table-card{
+  background: rgba(255,255,255,0.95);
+  border-radius:10px;
+  border:1px solid rgba(127,85,57,0.06);
+  box-shadow: 0 6px 18px var(--card-shadow);
+  padding:16px;
+  color:var(--muted);
+}
+
+/* Quick Summary */
+.quick-summary {
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));
+  border-radius: 10px;
+  border:1px solid rgba(127,85,57,0.04);
+  box-shadow: 0 6px 18px var(--card-shadow);
+}
+.quick-summary .qs-item {
+  min-width: 120px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(245,236,226,0.6), rgba(245,236,226,0.18));
+  text-align: center;
+}
+.qs-label { font-size: 0.75rem; color: var(--muted); font-weight:700; text-transform:uppercase; }
+.qs-value { font-size:1.25rem; font-weight:800; color:var(--coffee); margin-top:6px; }
+
+/* Chart wrapper to control aspect ratio */
+.chart-wrap {
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding: 8px 0;
+}
+
+/* Make canvas responsive and constrain aspect ratio */
+.table-card canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* specific size constraints */
+#kpiDoughnut {
+  aspect-ratio: 1 / 1;
+  max-width: 360px;
+  margin: 8px auto 0;
+}
+
+#revenueLine {
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  margin: 8px auto 0;
+}
+
+/* responsive */
+@media (max-width: 991px) {
+  .sidebar { width: 80px; }
+  .sidebar .nav-link { justify-content:center; padding:12px 6px; }
+  .sidebar .nav-link span { display:none; }
+  .sidebar-top .brand { display:none; }
+  #revenueLine { aspect-ratio: 4/3; max-width: 100%; }
+}
+
+/* small text tweaks */
+.small.text-muted { color: #7b6a58; }

@@ -1,0 +1,124 @@
+/* ===== FOOTER BASE ===== */
+.footer {
+  background: linear-gradient(180deg, #4e342e, #3e2723);
+  color: #ffffff;
+  padding: 70px 0 40px;
+  width: 100%;
+  border-top-left-radius: 0;   /* removed */
+  border-top-right-radius: 0;  /* removed */
+  box-shadow: none;            /* removed */
+}
+
+/* Centered & wider layout */
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Layout: side-by-side columns */
+.footer .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Make all footer columns equal width */
+.footer-section {
+  flex: 1;
+}
+
+/* Titles */
+.footer-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.footer-subtitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Text */
+.footer p {
+  color: #e0d5d1;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-link {
+  display: block;
+  color: #e0d5d1;
+  text-decoration: none;
+  padding: 6px 0;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* Social Icons */
+.footer-social {
+  margin-top: 20px;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: #e0d5d1;
+  transition: 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+/* Elegant divider */
+.footer-divider {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  margin: 40px 0 25px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+}
+
+/* Bottom text */
+.footer-bottom {
+  text-align: center;
+  color: #e0d5d1;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .footer .row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 40px;
+  }
+
+  .social-icon {
+    margin-right: 20px;
+  }
+}
