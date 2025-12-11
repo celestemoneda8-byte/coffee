@@ -1,0 +1,10 @@
+CREATE TABLE admin(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO admin(username, password, email) VALUES 
+('admin', '$2y$10$YIjlrIf.H.Q5f/. P2mqB9uVFSmn5l3YBY.YLoVrz3X0jvVf3V3eIa', 'admin@example.com');

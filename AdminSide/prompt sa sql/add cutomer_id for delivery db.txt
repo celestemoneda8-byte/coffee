@@ -1,0 +1,4 @@
+-- Add customer_id to existing orders table (run in your expresso DB)
+ALTER TABLE `orders`
+  ADD COLUMN `customer_id` INT UNSIGNED DEFAULT NULL,
+  ADD INDEX (`customer_id`);

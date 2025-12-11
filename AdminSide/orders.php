@@ -9,23 +9,37 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
     exit;
 }
 
+// Defensive DB connection check
+if (!isset($conn) || $conn === null) {
+    $err = $GLOBALS['db_connect_error'] ?? 'Database connection is not available.';
+    die('<h2>Database connection error</h2><p>' . htmlspecialchars((string)$err) . '</p>');
+}
+
 // Helper for currency
 function format_currency($amount) {
     $symbol = defined('CURRENCY_SYMBOL') ? CURRENCY_SYMBOL : '₱';
-    return $symbol . number_format((float)$amount, 2);
+    // Ensure numeric value
+    $val = is_numeric($amount) ? (float)$amount : 0.00;
+    return $symbol . number_format($val, 2);
 }
 
-// Fetch Orders
-$sql = "SELECT * FROM orders ORDER BY created_at DESC";
-$result = $conn->query($sql);
+// Fetch Orders (defensive: check $conn is mysqli and query success)
 $orders = [];
-if ($result) {
-    while ($row = $result->fetch_assoc()) {
-        $orders[] = $row;
+if (isset($conn) && $conn instanceof mysqli) {
+    $sql = "SELECT * FROM orders ORDER BY created_at DESC";
+    if ($result = $conn->query($sql)) {
+        while ($row = $result->fetch_assoc()) {
+            $orders[] = $row;
+        }
+        $result->free();
+    } else {
+        // optional: log error for debugging
+        error_log('orders.php: orders query failed: ' . $conn->error);
     }
 }
 
 $currentUser = $_SESSION['username'] ?? 'Admin';
+$avatarInitial = strtoupper(substr((string)$currentUser, 0, 1) ?: 'A');
 ?>
 <!doctype html>
 <html lang="en">
@@ -86,15 +100,15 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="page-title mb-0">Orders</h2>
           <div class="user-badge">
-             <div class="avatar"><?php echo strtoupper($currentUser[0]); ?></div>
-             <div class="ms-2 small text-muted"><?php echo htmlspecialchars($currentUser); ?></div>
+             <div class="avatar"><?php echo htmlspecialchars($avatarInitial); ?></div>
+             <div class="ms-2 small text-muted"><?php echo htmlspecialchars((string)$currentUser); ?></div>
           </div>
         </div>
 
         <!-- Flash Message (Success/Error) -->
         <?php if (isset($_SESSION['flash_msg'])): ?>
-            <div class="alert alert-<?php echo $_SESSION['flash_type'] ?? 'info'; ?> alert-dismissible fade show" role="alert">
-                <?php echo htmlspecialchars($_SESSION['flash_msg']); ?>
+            <div class="alert alert-<?php echo htmlspecialchars($_SESSION['flash_type'] ?? 'info'); ?> alert-dismissible fade show" role="alert">
+                <?php echo htmlspecialchars((string)$_SESSION['flash_msg']); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php unset($_SESSION['flash_msg'], $_SESSION['flash_type']); ?>
@@ -118,28 +132,37 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                   <?php if (empty($orders)): ?>
                     <tr><td colspan="6" class="text-center py-4 text-muted">No orders found.</td></tr>
                   <?php else: ?>
-                    <?php foreach ($orders as $order): ?>
+                    <?php foreach ($orders as $order): 
+                        // Defensive field extraction with fallbacks
+                        $orderId = isset($order['id']) ? (int)$order['id'] : 0;
+                        $customerName = (string)($order['customer_name'] ?? $order['name'] ?? 'Guest');
+                        $customerEmail = (string)($order['customer_email'] ?? $order['email'] ?? '');
+                        // amount: support total_amount, total, amount, order_total
+                        $amountVal = $order['total_amount'] ?? $order['total'] ?? $order['amount'] ?? $order['order_total'] ?? 0.00;
+                        $createdAt = $order['created_at'] ?? $order['created'] ?? null;
+                        $payStatus = (string)(isset($order['payment_status']) && $order['payment_status'] !== '' ? $order['payment_status'] : 'unpaid');
+                        $status = (string)($order['status'] ?? 'pending');
+                    ?>
                       <tr>
-                        <td class="ps-4 fw-bold">#<?php echo $order['id']; ?></td>
+                        <td class="ps-4 fw-bold">#<?php echo $orderId; ?></td>
                         
                         <td>
-                            <div class="fw-bold text-dark"><?php echo htmlspecialchars($order['customer_name'] ?: 'Guest'); ?></div>
-                            <div class="small text-muted"><?php echo htmlspecialchars($order['customer_email']); ?></div>
+                            <div class="fw-bold text-dark"><?php echo htmlspecialchars($customerName); ?></div>
+                            <div class="small text-muted"><?php echo htmlspecialchars($customerEmail); ?></div>
                             <div class="small text-muted" style="font-size:0.75rem;">
-                                <?php echo date('M d, H:i', strtotime($order['created_at'])); ?>
+                                <?php echo $createdAt ? htmlspecialchars(date('M d, H:i', strtotime((string)$createdAt))) : ''; ?>
                             </div>
                         </td>
 
-                        <td class="fw-bold"><?php echo format_currency($order['total_amount']); ?></td>
+                        <td class="fw-bold"><?php echo format_currency($amountVal); ?></td>
 
                         <!-- Payment Status Badge -->
                         <td>
                             <?php 
-                                $payStatus = $order['payment_status'] ?? 'unpaid'; 
                                 $badgeClass = ($payStatus === 'paid') ? 'bg-success' : 'bg-secondary';
                             ?>
-                            <span class="badge <?php echo $badgeClass; ?> rounded-pill">
-                                <?php echo ucfirst($payStatus); ?>
+                            <span class="badge <?php echo htmlspecialchars($badgeClass); ?> rounded-pill">
+                                <?php echo htmlspecialchars(ucfirst($payStatus)); ?>
                             </span>
                         </td>
 
@@ -147,34 +170,34 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                         <td>
                            <form action="order_actions.php" method="POST">
                                <input type="hidden" name="action" value="update_status">
-                               <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                               <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
                                
                                <select name="status" class="form-select form-select-sm status-select 
                                    <?php 
-                                      if($order['status']=='completed') echo 'border-success text-success'; 
-                                      elseif($order['status']=='cancelled') echo 'border-danger text-danger';
-                                      elseif($order['status']=='pending') echo 'border-warning text-warning-emphasis';
+                                      if($status === 'completed') echo 'border-success text-success'; 
+                                      elseif($status === 'cancelled') echo 'border-danger text-danger';
+                                      elseif($status === 'pending') echo 'border-warning text-warning-emphasis';
                                    ?>" 
                                    onchange="this.form.submit()" 
                                    style="width: 130px; font-weight:600;">
                                    
-                                   <option value="pending" <?php if($order['status']=='pending') echo 'selected'; ?>>Pending</option>
-                                   <option value="preparing" <?php if($order['status']=='preparing') echo 'selected'; ?>>Preparing</option>
-                                   <option value="ready" <?php if($order['status']=='ready') echo 'selected'; ?>>Ready</option>
-                                   <option value="completed" <?php if($order['status']=='completed') echo 'selected'; ?>>Completed</option>
-                                   <option value="cancelled" <?php if($order['status']=='cancelled') echo 'selected'; ?>>Cancelled</option>
+                                   <option value="pending" <?php if($status === 'pending') echo 'selected'; ?>>Pending</option>
+                                   <option value="preparing" <?php if($status === 'preparing') echo 'selected'; ?>>Preparing</option>
+                                   <option value="ready" <?php if($status === 'ready') echo 'selected'; ?>>Ready</option>
+                                   <option value="completed" <?php if($status === 'completed') echo 'selected'; ?>>Completed</option>
+                                   <option value="cancelled" <?php if($status === 'cancelled') echo 'selected'; ?>>Cancelled</option>
                                </select>
                            </form>
                         </td>
 
                         <!-- Action Buttons -->
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group" role="group" aria-label="Order actions">
                                 <!-- Mark as Paid (only if unpaid) -->
-                                <?php if (($order['payment_status'] ?? 'unpaid') !== 'paid'): ?>
+                                <?php if ($payStatus !== 'paid'): ?>
                                 <form action="order_actions.php" method="POST" class="d-inline">
                                     <input type="hidden" name="action" value="mark_paid">
-                                    <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                    <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
                                     <button type="submit" class="btn btn-sm btn-outline-success" title="Mark as Paid">
                                         <i class="bi bi-cash-coin"></i>
                                     </button>
@@ -182,10 +205,10 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                                 <?php endif; ?>
 
                                 <!-- Cancel Button (only if not already cancelled/completed) -->
-                                <?php if (!in_array($order['status'], ['completed', 'cancelled'])): ?>
+                                <?php if (!in_array($status, ['completed', 'cancelled'])): ?>
                                 <form action="order_actions.php" method="POST" class="d-inline ms-1" onsubmit="return confirm('Are you sure you want to cancel this order?');">
                                     <input type="hidden" name="action" value="cancel">
-                                    <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                    <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="Cancel Order">
                                         <i class="bi bi-x-circle"></i>
                                     </button>
@@ -195,7 +218,7 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                                 <!-- Delete (Trash) -->
                                 <form action="order_actions.php" method="POST" class="d-inline ms-1" onsubmit="return confirm('Permanently delete this record?');">
                                     <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                    <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
                                     <button type="submit" class="btn btn-sm btn-light text-danger" title="Delete Record">
                                         <i class="bi bi-trash"></i>
                                     </button>

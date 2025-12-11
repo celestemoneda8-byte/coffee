@@ -1,0 +1,135 @@
+/* dashboard.override.css
+   - Balanced gutters (Option B) + Add button styling.
+   - Save next to dashboard.css and include AFTER dashboard.css:
+       <link rel="stylesheet" href="dashboard.css">
+       <link rel="stylesheet" href="dashboard.override.css">
+*/
+
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Layout: Balanced gutters (Option B) ---------- */
+/* Reset common container constraints inside main so children can stretch */
+.main-with-sidebar .container-fluid,
+.main-with-sidebar .container,
+.main-with-sidebar .row {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* Stretch content but keep equal left/right gutters */
+.main-with-sidebar .content-wrap,
+.main-with-sidebar > .container-fluid.content-wrap {
+  box-sizing: border-box;
+  width: calc(100vw - 260px - 48px) !important; /* viewport - sidebar - left/right gutters */
+  max-width: calc(100vw - 260px - 48px) !important;
+  margin-left: 24px !important;   /* left gutter */
+  margin-right: 24px !important;  /* right gutter */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 18px !important;
+  position: relative !important;
+}
+
+/* Ensure direct children fill the content-wrap */
+.main-with-sidebar .content-wrap > *,
+.main-with-sidebar > .container-fluid.content-wrap > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Make cards / tables fill the new width */
+.payment-area .card,
+.payment-area .table-card,
+.payment-area .panel,
+.content-wrap .card {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.03) !important;
+}
+
+/* Table responsiveness */
+.payment-area .table-responsive,
+.payment-area .table-responsive .table {
+  width: 100% !important;
+  overflow-x: auto !important;
+}
+
+/* Mobile fallback */
+@media (max-width: 900px) {
+  .sidebar { display: none !important; }
+  .main-with-sidebar .content-wrap,
+  .main-with-sidebar > .container-fluid.content-wrap {
+    max-width: none !important;
+    width: auto !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+  }
+}
+
+/* ---------- Add button styling (use .btn-accent.btn-add) ---------- */
+.btn-accent.btn-add {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg,#d89f7f,#c88760) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px rgba(200,130,96,0.18) !important;
+  cursor: pointer !important;
+  transition: transform .08s ease, box-shadow .12s ease, filter .12s ease;
+  white-space: nowrap !important;
+}
+
+/* Icon inside the Add button */
+.btn-accent.btn-add i {
+  font-size: 1rem !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+}
+
+/* Hover / active / focus states */
+.btn-accent.btn-add:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+  box-shadow: 0 10px 26px rgba(200,130,96,0.22) !important;
+}
+.btn-accent.btn-add:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(200,130,96,0.18) !important;
+}
+.btn-accent.btn-add:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(200,130,96,0.10) !important;
+}
+
+/* Ensure the grid column doesn't force tiny height; make the button fill the column */
+.col-md-1.d-grid .btn-accent.btn-add,
+.col-12.col-md-1.d-grid .btn-accent.btn-add {
+  width: 100% !important;
+  padding-top: .5rem !important;
+  padding-bottom: .5rem !important;
+}
+
+/* Small-screen adjustments */
+@media (max-width:575.98px) {
+  .btn-accent.btn-add { width: 100% !important; justify-content: center !important; }
+  #addPaymentForm .col-12.col-md-1 { display:flex; width:100%; }
+}

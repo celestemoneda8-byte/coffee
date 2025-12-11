@@ -10,10 +10,45 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
     exit;
 }
 
+// Defensive DB connection check
+if (!isset($conn) || $conn === null) {
+    $err = $GLOBALS['db_connect_error'] ?? 'Database connection is not available.';
+    die('<h2>Database connection error</h2><p>' . htmlspecialchars($err) . '</p>');
+}
+
 // currency helper
 function format_currency($amount) {
     $symbol = defined('CURRENCY_SYMBOL') ? CURRENCY_SYMBOL : '₱';
     return $symbol . number_format((float)$amount, 2);
+}
+
+// detect which column holds the order total (safe probing)
+function detect_total_column($conn) {
+    // candidates in order of likelihood
+    $candidates = ['total', 'total_amount', 'amount', 'order_total', 'price', 'grand_total'];
+
+    foreach ($candidates as $col) {
+        // Use SHOW COLUMNS ... LIKE safely (escape)
+        $colEsc = $conn->real_escape_string($col);
+        $res = $conn->query("SHOW COLUMNS FROM `orders` LIKE '{$colEsc}'");
+        if ($res) {
+            if ($res->num_rows > 0) {
+                $res->free();
+                // ensure it's a safe identifier (letters, numbers, underscore)
+                if (preg_match('/^[a-zA-Z0-9_]+$/', $col)) return $col;
+            }
+            $res->free();
+        }
+    }
+    return null;
+}
+
+// get the total column name (or null)
+$totalCol = detect_total_column($conn);
+$totalColQuoted = null;
+if ($totalCol !== null) {
+    // safe backtick quoted identifier
+    $totalColQuoted = "`" . str_replace("`", "``", $totalCol) . "`";
 }
 
 // Initialize values and error container (safe defaults to avoid undefined var warnings)
@@ -45,27 +80,44 @@ if ($res) {
     if (!$query_error) $query_error = $conn->error;
 }
 
-// total customers (distinct non-empty email or name)
-$res = $conn->query("SELECT COUNT(DISTINCT COALESCE(NULLIF(customer_email,''), NULLIF(customer_name,''))) AS customers FROM orders");
+// total customers: prefer customers table; fallback to distinct names from orders
+$res = $conn->query("SELECT COUNT(*) AS customers FROM customers");
 if ($res) {
     $row = $res->fetch_assoc();
     $kpi['total_customers'] = (int)($row['customers'] ?? 0);
     $res->free();
 } else {
-    if (!$query_error) $query_error = $conn->error;
+    // fallback if customers table doesn't exist or query failed
+    if (!$query_error) {
+        $fallback = $conn->query("SELECT COUNT(DISTINCT NULLIF(customer_name,'')) AS customers FROM orders");
+        if ($fallback) {
+            $row = $fallback->fetch_assoc();
+            $kpi['total_customers'] = (int)($row['customers'] ?? 0);
+            $fallback->free();
+        } else {
+            $query_error = $conn->error;
+        }
+    }
 }
 
-// total sales
-$res = $conn->query("SELECT COALESCE(SUM(total_amount),0) AS sales FROM orders");
-if ($res) {
-    $row = $res->fetch_assoc();
-    $kpi['total_sales'] = (float)($row['sales'] ?? 0);
-    $res->free();
+// total sales - use detected column if available
+if ($totalColQuoted !== null) {
+    $sql = "SELECT COALESCE(SUM({$totalColQuoted}),0) AS sales FROM orders";
+    $res = $conn->query($sql);
+    if ($res) {
+        $row = $res->fetch_assoc();
+        $kpi['total_sales'] = (float)($row['sales'] ?? 0);
+        $res->free();
+    } else {
+        if (!$query_error) $query_error = $conn->error;
+    }
 } else {
-    if (!$query_error) $query_error = $conn->error;
+    // no total column found — set 0 and warn user
+    if (!$query_error) $query_error = 'No order total column found in orders table. Expected one of: total, total_amount, amount, order_total, price, grand_total.';
+    $kpi['total_sales'] = 0.00;
 }
 
-// KPI doughnut data (left as before)
+// KPI doughnut data
 $chartKpiLabels = [
     'Total Orders',
     'Pending Orders',
@@ -88,20 +140,26 @@ for ($i = 6; $i >= 0; $i--) {
 }
 $revenueMap = array_fill_keys($days, 0.00);
 
-$sqlRev7 = "SELECT DATE(created_at) AS dt, COALESCE(SUM(total_amount),0) AS rev
-            FROM orders
-            WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
-            GROUP BY DATE(created_at)
-            ORDER BY DATE(created_at) ASC";
-if ($res = $conn->query($sqlRev7)) {
-    while ($row = $res->fetch_assoc()) {
-        $d = $row['dt'];
-        if (array_key_exists($d, $revenueMap)) $revenueMap[$d] = (float)$row['rev'];
+if ($totalColQuoted !== null) {
+    $sqlRev7 = "SELECT DATE(created_at) AS dt, COALESCE(SUM({$totalColQuoted}),0) AS rev
+                FROM orders
+                WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+                GROUP BY DATE(created_at)
+                ORDER BY DATE(created_at) ASC";
+    if ($res = $conn->query($sqlRev7)) {
+        while ($row = $res->fetch_assoc()) {
+            $d = $row['dt'];
+            if (array_key_exists($d, $revenueMap)) $revenueMap[$d] = (float)$row['rev'];
+        }
+        $res->free();
+    } else {
+        if (!$query_error) $query_error = $conn->error;
     }
-    $res->free();
 } else {
-    if (!$query_error) $query_error = $conn->error;
+    // cannot compute revenue without a total-like column; leave zeros
+    if (!$query_error) $query_error = 'Revenue chart disabled: no total-like column detected in orders table.';
 }
+
 $chartRevLabels = array_map(function($d){ return date('M j', strtotime($d)); }, array_keys($revenueMap));
 $chartRevData = array_values($revenueMap);
 
@@ -162,7 +220,6 @@ $currentUser = $_SESSION['username'] ?? 'admin';
 
         <a href="admin-login.php" class="nav-link logout-link mt-auto">
           <i class="bi bi-box-arrow-right me-2"></i> Logout
-
         </a>
       </nav>
     </aside>
@@ -277,6 +334,10 @@ $currentUser = $_SESSION['username'] ?? 'admin';
             </div>
           </div>
         </div>
+
+      </div>
+    </main>
+  </div>
 
   <!-- Bootstrap bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
