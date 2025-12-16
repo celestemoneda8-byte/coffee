@@ -25,8 +25,8 @@ $historyResult = $history->get_result();
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>My Orders | Expresso Café</title>
 
-<link rel="stylesheet" href="css/globa.css">
-<link rel="stylesheet" href="css/order.css">
+<link rel="stylesheet" href="../css/globa.css">
+<link rel="stylesheet" href="../css/order.css">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
@@ -120,7 +120,7 @@ $historyResult = $history->get_result();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 
 <script>
 /*
