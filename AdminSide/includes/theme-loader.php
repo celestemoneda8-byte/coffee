@@ -1,37 +1,43 @@
 <?php
 /**
- * Theme Loader - Load and apply saved theme colors to all admin pages
- * Include this in the <head> section of admin pages
+ * Theme Loader Helper
+ * Include this in the <head> section to load the current theme
  */
 
-// Fetch theme settings from database
-$themeColors = [
-    'admin_primary_color' => '#7f5539',
-    'admin_secondary_color' => '#7b6a58',
-    'admin_accent_color' => '#dec0ad',
-];
+// Ensure connection
+if (!isset($conn) || $conn === null) {
+    return; // Skip if no connection
+}
 
-if (isset($conn) && $conn) {
-    $result = $conn->query("SELECT setting_key, setting_value FROM app_settings WHERE setting_key LIKE 'admin_%_color'");
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $themeColors[$row['setting_key']] = $row['setting_value'];
-        }
+// Fetch current admin theme colors
+$admin_primary = '#7f5539';
+$admin_secondary = '#7b6a58';
+$admin_accent = '#dec0ad';
+
+$res = $conn->query("SELECT setting_key, setting_value FROM app_settings WHERE setting_key LIKE 'admin_%'");
+if ($res) {
+    while ($row = $res->fetch_assoc()) {
+        if ($row['setting_key'] === 'admin_primary_color') $admin_primary = $row['setting_value'];
+        elseif ($row['setting_key'] === 'admin_secondary_color') $admin_secondary = $row['setting_value'];
+        elseif ($row['setting_key'] === 'admin_accent_color') $admin_accent = $row['setting_value'];
     }
+    $res->free();
 }
 ?>
-
-<!-- Dynamic Theme Stylesheet -->
-<style id="dynamicTheme">
+<link rel="stylesheet" href="../css/theme.css">
+<style id="themeVars">
     :root {
-        --admin-primary: <?php echo htmlspecialchars($themeColors['admin_primary_color'] ?? '#7f5539'); ?>;
-        --admin-primary-light: <?php echo htmlspecialchars($themeColors['admin_primary_color'] ?? '#7f5539'); ?>cc;
-        --admin-primary-dark: <?php echo htmlspecialchars($themeColors['admin_primary_color'] ?? '#7f5539'); ?>cc;
-        --admin-secondary: <?php echo htmlspecialchars($themeColors['admin_secondary_color'] ?? '#7b6a58'); ?>;
-        --admin-secondary-light: <?php echo htmlspecialchars($themeColors['admin_secondary_color'] ?? '#7b6a58'); ?>cc;
-        --admin-secondary-dark: <?php echo htmlspecialchars($themeColors['admin_secondary_color'] ?? '#7b6a58'); ?>cc;
-        --admin-accent: <?php echo htmlspecialchars($themeColors['admin_accent_color'] ?? '#dec0ad'); ?>;
-        --admin-accent-dark: <?php echo htmlspecialchars($themeColors['admin_accent_color'] ?? '#dec0ad'); ?>cc;
-        --page-bg: <?php echo htmlspecialchars($themeColors['admin_primary_color'] ?? '#7f5539'); ?>15;
+        --admin-primary: <?php echo htmlspecialchars($admin_primary); ?>;
+        --admin-secondary: <?php echo htmlspecialchars($admin_secondary); ?>;
+        --admin-accent: <?php echo htmlspecialchars($admin_accent); ?>;
+        --page-bg: <?php echo htmlspecialchars($admin_primary); ?>15;
     }
 </style>
+<script>
+    // Listen for theme changes from other tabs
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'reloadAdminPages') {
+            location.reload();
+        }
+    });
+</script>
