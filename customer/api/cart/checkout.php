@@ -1,8 +1,9 @@
 <?php
 session_start();
 header("Content-Type: application/json");
+require_once __DIR__ . "/../../config/db_connect.php";
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['customer_id'])) {
     echo json_encode(["status"=>"error","message"=>"Login required."]);
     exit;
 }

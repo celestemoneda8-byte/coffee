@@ -7,7 +7,8 @@ $input = json_decode(file_get_contents('php://input'), true);
 $product_id = intval($input['product_id'] ?? 0);
 
 if ($product_id <= 0) {
-    echo json_encode(["status"=>"error","message"=>"Invalid product ID"]);
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Invalid product ID"]);
     exit;
 }
 
@@ -15,4 +16,4 @@ if (isset($_SESSION['cart'][$product_id])) {
     unset($_SESSION['cart'][$product_id]);
 }
 
-echo json_encode(["status" => "success"]);
+echo json_encode(["status" => "success", "message" => "Item removed"]);

@@ -5,11 +5,13 @@ session_start();
 
 $count = 0;
 if (isset($_SESSION['cart'])) {
-    // count total quantity (frontend badges in menu expected unique count sometimes; JS uses cart_count from server)
-    foreach ($_SESSION['cart'] as $it) $count += intval($it['qty']);
+    // count total quantity
+    foreach ($_SESSION['cart'] as $it) {
+        $count += intval($it['qty'] ?? 0);
+    }
 }
 
 echo json_encode([
     "status" => "success",
-    "cart_count" => $count
+    "count" => $count
 ]);
