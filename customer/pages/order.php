@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../db.php";// <-- make sure this sets up $conn (mysqli) or change to your DB include
+require_once "../../db.php";
 
 // NOTE: this page used $_SESSION['user_id'] previously. We'll expose it to JS as CUSTOMER_ID
 $userId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : 0;
