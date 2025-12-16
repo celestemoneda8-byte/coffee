@@ -187,11 +187,11 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- Main Admin Stylesheet -->
   <link rel="stylesheet" href="../css/main.css?v=1.1">
-  <!-- Complete Theme Stylesheet -->
-  <link rel="stylesheet" href="../css/theme-complete.css?v=1.0">
+  <!-- Theme Stylesheet -->
+  <link rel="stylesheet" href="../css/theme.css?v=1.0">
   
   <!-- Load Theme Colors -->
-  <?php include '../includes/theme-loader.php'; ?>
+  <?php include '../includes/theme_loader.php'; ?>
 </head>
 <body>
   <div class="d-flex min-vh-100">
