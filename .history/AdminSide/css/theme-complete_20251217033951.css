@@ -35,12 +35,12 @@
 
 /* ====== BODY & LAYOUT ====== */
 body {
-    background-color: var(--page-bg) !important;
+    background-color: #f8f9fa !important;
     color: var(--text-primary);
 }
 
 body.page-bg {
-    background-color: var(--page-bg);
+    background-color: #f8f9fa;
 }
 
 .container-fluid {
