@@ -66,37 +66,6 @@ $currentUser = htmlspecialchars($_SESSION['username'] ?? 'Admin');
   
   <!-- Load Theme Colors -->
   <?php include '../includes/theme_loader.php'; ?>
-  
-  <!-- Apply Theme to Menu Page -->
-  <style>
-    .card {
-      border-color: var(--admin-accent, #dec0ad);
-    }
-    
-    .card-title {
-      color: var(--admin-primary, #7f5539);
-      font-weight: 600;
-    }
-    
-    .btn-primary {
-      background-color: var(--admin-primary, #7f5539) !important;
-      border-color: var(--admin-primary, #7f5539) !important;
-    }
-    
-    .btn-primary:hover {
-      background-color: var(--admin-secondary, #7b6a58) !important;
-      border-color: var(--admin-secondary, #7b6a58) !important;
-    }
-    
-    .list-group-item {
-      border-color: var(--admin-accent, #dec0ad) !important;
-    }
-    
-    .form-control:focus, .form-select:focus, .form-check-input:focus {
-      border-color: var(--admin-primary, #7f5539) !important;
-      box-shadow: 0 0 0 0.25rem rgba(127, 85, 57, 0.25) !important;
-    }
-  </style>
 </head>
 <body>
   <div class="d-flex min-vh-100">

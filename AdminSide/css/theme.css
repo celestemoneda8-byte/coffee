@@ -7,64 +7,44 @@
     --page-bg: rgba(127, 85, 57, 0.08);
 }
 
-/* Apply theme to sidebar - MOST IMPORTANT */
+/* Apply theme to sidebar */
 .sidebar {
-    background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 100%) !important;
-    color: white !important;
-    border-right-color: rgba(0, 0, 0, 0.15) !important;
-}
-
-.sidebar-top .brand {
-    color: white !important;
-    font-weight: 700 !important;
-}
-
-.sidebar-top .text-muted {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.sidebar-nav {
-    gap: 8px;
+    background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 100%);
+    color: white;
 }
 
 .sidebar .nav-link {
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
-    border-radius: 10px;
 }
 
 .sidebar .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 .sidebar .nav-link.active {
-    background: linear-gradient(90deg, var(--admin-accent) 0%, var(--admin-accent) 100%) !important;
-    color: #000 !important;
-    font-weight: 600 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-}
-
-.logout-link {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.logout-link:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: white !important;
+    background-color: var(--admin-accent);
+    color: #000;
+    font-weight: 600;
 }
 
 /* Apply theme to primary buttons */
 .btn-primary {
-    background-color: var(--admin-primary) !important;
-    border-color: var(--admin-primary) !important;
+    background-color: var(--admin-primary);
+    border-color: var(--admin-primary);
 }
 
-.btn-primary:hover,
+.btn-primary:hover {
+    background-color: var(--admin-secondary);
+    border-color: var(--admin-secondary);
+}
+
 .btn-primary:focus,
 .btn-primary:active {
-    background-color: var(--admin-secondary) !important;
-    border-color: var(--admin-secondary) !important;
+    background-color: var(--admin-secondary);
+    border-color: var(--admin-secondary);
+    box-shadow: 0 0 0 0.25rem rgba(127, 85, 57, 0.25);
 }
 
 /* Apply theme to badges */
@@ -74,70 +54,82 @@
 
 /* Apply theme to card headers */
 .card-header {
-    border-bottom: 2px solid var(--admin-accent) !important;
+    border-bottom: 2px solid var(--admin-accent);
 }
 
 .card-header.bg-light {
     background-color: var(--admin-accent) !important;
-    color: #000 !important;
-    font-weight: 500 !important;
+    color: #000;
+    font-weight: 500;
 }
 
 /* Apply theme to table headers */
-.table-light,
-.table thead th {
+.table-light {
     background-color: var(--admin-accent) !important;
-    color: #000 !important;
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(222, 192, 173, 0.3) !important;
+    background-color: rgba(222, 192, 173, 0.3);
 }
 
 /* Apply theme to form elements */
 .form-check-input:checked {
-    background-color: var(--admin-primary) !important;
-    border-color: var(--admin-primary) !important;
+    background-color: var(--admin-primary);
+    border-color: var(--admin-primary);
 }
 
-.form-control:focus,
+.form-control:focus {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 0.2rem rgba(127, 85, 57, 0.25);
+}
+
 .form-select:focus {
-    border-color: var(--admin-primary) !important;
-    box-shadow: 0 0 0 0.2rem rgba(127, 85, 57, 0.25) !important;
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 0.2rem rgba(127, 85, 57, 0.25);
 }
 
-/* Apply theme to page background */
+/* Apply theme to background */
 body.page-bg {
-    background-color: var(--page-bg) !important;
+    background-color: var(--page-bg);
 }
 
 main {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, var(--page-bg) 100%) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, var(--page-bg) 100%);
 }
 
 /* Apply theme to progress bars */
 .progress-bar {
-    background-color: var(--admin-primary) !important;
+    background-color: var(--admin-primary);
 }
 
-/* Apply theme to alerts */
+/* Apply theme to cards */
+.card {
+    border-color: var(--admin-accent);
+    border-width: 1px;
+}
+
+.card .card-title {
+    color: var(--admin-primary);
+    font-weight: 600;
+}
+
+/* Apply theme to list groups */
+.list-group-item {
+    border-color: var(--admin-accent);
+}
+
+/* Apply theme to alerts with accent */
 .alert-light {
-    background-color: var(--admin-accent) !important;
-    border-color: var(--admin-primary) !important;
-    color: #000 !important;
+    background-color: var(--admin-accent);
+    border-color: var(--admin-primary);
 }
 
-/* Active nav link in pages */
-.nav-link.active {
-    background-color: var(--admin-accent) !important;
-    color: #000 !important;
+/* Smooth transitions for theme changes */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Success and info colors */
-.btn-success {
-    background-color: #28a745 !important;
-}
-
-.btn-success:hover {
-    background-color: #218838 !important;
+/* Prevent transitions on mouse move */
+body.transitioning * {
+    transition: none;
 }
