@@ -18,7 +18,7 @@ function resolveImg(src) {
 // --- FETCH CART COUNT FROM SERVER ---
 async function fetchCartCount() {
     try {
-        const res = await fetch("api/get_cart_count.php");
+        const res = await fetch("../api/cart/get_cart_count.php");
         const data = await res.json();
         if (data.status === "success") updateCartBadge(data.count);
     } catch (err) {
@@ -33,7 +33,7 @@ async function loadCartPreview() {
     if (!container || !totalEl) return;
 
     try {
-        const res = await fetch("api/cart/get_cart.php");
+        const res = await fetch("../api/cart/get_cart.php");
         const data = await res.json();
         const cartItems = data.cart || [];
 
