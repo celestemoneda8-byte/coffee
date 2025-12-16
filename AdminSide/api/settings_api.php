@@ -1,7 +1,16 @@
 <?php
+// Start output buffering to catch any unexpected output
+ob_start();
+
 session_start();
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/db_connect.php';
+
+// Clear any buffered output before sending JSON
+ob_clean();
+
+// Set JSON header first
+header('Content-Type: application/json; charset=utf-8');
 
 // Protect API
 if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
@@ -10,12 +19,10 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
     exit;
 }
 
-header('Content-Type: application/json');
-
 // Ensure app_settings table exists
 function ensureAppSettingsTable($conn) {
     $result = $conn->query("SHOW TABLES LIKE 'app_settings'");
-    if ($result->num_rows === 0) {
+    if ($result && $result->num_rows === 0) {
         $createSQL = "CREATE TABLE IF NOT EXISTS app_settings (
             id INT PRIMARY KEY AUTO_INCREMENT,
             setting_key VARCHAR(255) NOT NULL UNIQUE,
@@ -89,24 +96,52 @@ if ($action === 'upload_logo') {
 
 if ($action === 'update') {
     // Handle settings update
-    $data = json_decode(file_get_contents('php://input'), true);
-    
-    if (!$data) {
-        echo json_encode(['success' => false, 'message' => 'Invalid data']);
-        exit;
-    }
-
     try {
+        $inputData = file_get_contents('php://input');
+        
+        if (empty($inputData)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'No data provided']);
+            exit;
+        }
+        
+        $data = json_decode($inputData, true);
+        
+        if (!is_array($data) || empty($data)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid JSON data']);
+            exit;
+        }
+
         foreach ($data as $key => $value) {
+            // Validate key and value
+            if (!is_string($key) || empty($key)) {
+                continue;
+            }
+            
+            $value = (string)$value;
+            
+            // Use prepared statements for security
             $stmt = $conn->prepare("INSERT INTO app_settings (setting_key, setting_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE setting_value = ?");
+            
+            if (!$stmt) {
+                throw new Exception("Prepare failed: " . $conn->error);
+            }
+            
             $stmt->bind_param('sss', $key, $value, $value);
-            $stmt->execute();
+            
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed for key '$key': " . $stmt->error);
+            }
+            
             $stmt->close();
         }
 
+        http_response_code(200);
         echo json_encode(['success' => true, 'message' => 'Settings updated successfully']);
     } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
     }
     exit;
 }
