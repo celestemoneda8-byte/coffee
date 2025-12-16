@@ -10,9 +10,9 @@ if (!isset($conn) || $conn === null) {
 }
 
 // Fetch current admin theme colors
-$admin_primary = '#7f5539';
-$admin_secondary = '#7b6a58';
-$admin_accent = '#dec0ad';
+$admin_primary = '#c9a882';
+$admin_secondary = '#b8966f';
+$admin_accent = '#f5e6d3';
 
 $res = $conn->query("SELECT setting_key, setting_value FROM app_settings WHERE setting_key LIKE 'admin_%'");
 if ($res) {

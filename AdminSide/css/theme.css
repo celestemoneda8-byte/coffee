@@ -1,10 +1,10 @@
 /* Dynamic Theme System for Admin Dashboard */
 
 :root {
-    --admin-primary: #7f5539;
-    --admin-secondary: #7b6a58;
-    --admin-accent: #dec0ad;
-    --page-bg: rgba(127, 85, 57, 0.08);
+    --admin-primary: #c9a882;
+    --admin-secondary: #b8966f;
+    --admin-accent: #f5e6d3;
+    --page-bg: rgba(201, 168, 130, 0.08);
 }
 
 /* Apply theme to sidebar - OVERRIDE main.css */

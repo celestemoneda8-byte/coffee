@@ -27,8 +27,14 @@ if ($result) {
 
 // Color theme presets
 $colorThemes = [
+    'tan' => [
+        'name' => 'Light Tan (Default)',
+        'primary' => '#c9a882',
+        'secondary' => '#b8966f',
+        'accent' => '#f5e6d3'
+    ],
     'brown' => [
-        'name' => 'Brown Coffee',
+        'name' => 'Dark Brown Coffee',
         'primary' => '#7f5539',
         'secondary' => '#7b6a58',
         'accent' => '#dec0ad'
@@ -86,13 +92,8 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Main Admin Stylesheet -->
     <link rel="stylesheet" href="../css/main.css?v=1.1">
-    <!-- Theme Stylesheet -->
-    <link rel="stylesheet" href="../css/theme.css?v=1.0">
     
-    <!-- Load Theme Colors -->
-    <?php include '../includes/theme_loader.php'; ?>
-    
-    <!-- Dynamic Theme Stylesheet (for live preview) -->
+    <!-- Dynamic Theme Stylesheet -->
     <style id="dynamicTheme">
         :root {
             --admin-primary: <?php echo htmlspecialchars($settings['admin_primary_color'] ?? '#7f5539'); ?>;
@@ -351,15 +352,15 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
         
         let settingsData = {
             website_name: '<?php echo htmlspecialchars($settings['website_name'] ?? 'EXpresso Caffe'); ?>',
-            admin_primary_color: '<?php echo htmlspecialchars($settings['admin_primary_color'] ?? '#7f5539'); ?>',
-            admin_secondary_color: '<?php echo htmlspecialchars($settings['admin_secondary_color'] ?? '#7b6a58'); ?>',
-            admin_accent_color: '<?php echo htmlspecialchars($settings['admin_accent_color'] ?? '#dec0ad'); ?>',
-            customer_primary_color: '<?php echo htmlspecialchars($settings['customer_primary_color'] ?? '#7f5539'); ?>',
-            customer_secondary_color: '<?php echo htmlspecialchars($settings['customer_secondary_color'] ?? '#7b6a58'); ?>',
-            customer_accent_color: '<?php echo htmlspecialchars($settings['customer_accent_color'] ?? '#dec0ad'); ?>',
-            rider_primary_color: '<?php echo htmlspecialchars($settings['rider_primary_color'] ?? '#7f5539'); ?>',
-            rider_secondary_color: '<?php echo htmlspecialchars($settings['rider_secondary_color'] ?? '#7b6a58'); ?>',
-            rider_accent_color: '<?php echo htmlspecialchars($settings['rider_accent_color'] ?? '#dec0ad'); ?>'
+            admin_primary_color: '<?php echo htmlspecialchars($settings['admin_primary_color'] ?? '#c9a882'); ?>',
+            admin_secondary_color: '<?php echo htmlspecialchars($settings['admin_secondary_color'] ?? '#b8966f'); ?>',
+            admin_accent_color: '<?php echo htmlspecialchars($settings['admin_accent_color'] ?? '#f5e6d3'); ?>',
+            customer_primary_color: '<?php echo htmlspecialchars($settings['customer_primary_color'] ?? '#c9a882'); ?>',
+            customer_secondary_color: '<?php echo htmlspecialchars($settings['customer_secondary_color'] ?? '#b8966f'); ?>',
+            customer_accent_color: '<?php echo htmlspecialchars($settings['customer_accent_color'] ?? '#f5e6d3'); ?>',
+            rider_primary_color: '<?php echo htmlspecialchars($settings['rider_primary_color'] ?? '#c9a882'); ?>',
+            rider_secondary_color: '<?php echo htmlspecialchars($settings['rider_secondary_color'] ?? '#b8966f'); ?>',
+            rider_accent_color: '<?php echo htmlspecialchars($settings['rider_accent_color'] ?? '#f5e6d3'); ?>'
         };
 
         // Handle website name changes
@@ -548,15 +549,15 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
             
             const defaultSettings = {
                 website_name: 'EXpresso Caffe',
-                admin_primary_color: '#7f5539',
-                admin_secondary_color: '#7b6a58',
-                admin_accent_color: '#dec0ad',
-                customer_primary_color: '#7f5539',
-                customer_secondary_color: '#7b6a58',
-                customer_accent_color: '#dec0ad',
-                rider_primary_color: '#7f5539',
-                rider_secondary_color: '#7b6a58',
-                rider_accent_color: '#dec0ad'
+                admin_primary_color: '#c9a882',
+                admin_secondary_color: '#b8966f',
+                admin_accent_color: '#f5e6d3',
+                customer_primary_color: '#c9a882',
+                customer_secondary_color: '#b8966f',
+                customer_accent_color: '#f5e6d3',
+                rider_primary_color: '#c9a882',
+                rider_secondary_color: '#b8966f',
+                rider_accent_color: '#f5e6d3'
             };
 
             console.log('Default settings:', defaultSettings);
