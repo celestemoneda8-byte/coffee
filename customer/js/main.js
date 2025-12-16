@@ -128,7 +128,7 @@ function ensureCartBadgeElement() {
 // -------- LOAD PRODUCTS (MENU) --------
 async function loadProductsAndMenu() {
     try {
-        const res = await fetch("api/products/get_products.php");
+        const res = await fetch("../api/products/get_products.php");
         const data = await res.json();
         if (data.status === "success") {
             coffeeMenu = (data.products || []).map(p => ({
@@ -284,7 +284,7 @@ async function addToCart(productId, qty) {
 
     // Try backend first
     try {
-        const res = await fetch('api/cart/add_to_cart.php', {
+        const res = await fetch('../api/cart/add_to_cart.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId, qty })
@@ -391,7 +391,7 @@ async function showOrderSummary(productId, qty) {
 // Generic remove from cart (used by menu preview and other parts)
 async function removeFromCart(productId) {
     try {
-        const res = await fetch('api/cart/remove_from_cart.php', {
+        const res = await fetch('../api/cart/remove_from_cart.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId })
@@ -423,7 +423,7 @@ async function changeQtyInPage(productId, delta) {
     qty = Math.max(1, qty + delta);
 
     try {
-        const res = await fetch('api/cart/update_qty.php', {
+        const res = await fetch('../api/cart/update_qty.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId, qty })
@@ -450,7 +450,7 @@ async function changeQtyInPage(productId, delta) {
 
 async function reloadServerCartCacheAndRecalcTotal() {
     try {
-        const res = await fetch('api/cart/get_cart.php');
+        const res = await fetch('../api/cart/get_cart.php');
         const data = await res.json();
         SERVER_CART = data.cart || [];
         let total = 0;
@@ -465,7 +465,7 @@ async function reloadServerCartCacheAndRecalcTotal() {
 async function removeFromCartPage(productId) {
     if (!confirm('Remove this item from cart?')) return;
     try {
-        const res = await fetch('api/cart/remove_from_cart.php', {
+        const res = await fetch('../api/cart/remove_from_cart.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: productId })
@@ -493,7 +493,7 @@ async function checkoutSelected() {
     const selectedIds = checked.map(cb => cb.dataset.id).map(id => String(id));
 
     try {
-        const res = await fetch('api/cart/get_cart.php');
+        const res = await fetch('../api/cart/get_cart.php');
         const data = await res.json();
         if (data.status !== 'success') {
             alert('Failed to load cart items');
@@ -540,7 +540,7 @@ async function loadCartPage() {
 
     let data;
     try {
-        const res = await fetch('api/cart/get_cart.php');
+        const res = await fetch('../api/cart/get_cart.php');
         data = await res.json();
     } catch (err) {
         console.error('Failed to fetch cart', err);
@@ -630,7 +630,7 @@ async function loadCartPage() {
         if (!confirm('Remove this item from cart?')) return;
         try {
           // call your existing remove endpoint
-          const res = await fetch('api/cart/remove_from_cart.php', {
+          const res = await fetch('../api/cart/remove_from_cart.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ product_id: pid })
@@ -742,9 +742,9 @@ window.addEventListener('load', mainInit);
 // -------------------------
 (function () {
   // NOTE: CHANGED TO ABSOLUTE PATHS TO MATCH WHERE PHP FILES LIVE
-  const ORDER_API = 'api/order/create_order.php'; // <- changed from 'api/order/create_order.php'
-  const ADDONS_API = 'api/checkout/get_addons.php'; // ensure this path exists or adjust
-  const CUSTOMER_API = 'api/customer/get_account.php'; // ensure this path exists or adjust
+  const ORDER_API = '../api/order/create_order.php'; // <- changed from '../api/order/create_order.php'
+  const ADDONS_API = '../api/checkout/get_addons.php'; // ensure this path exists or adjust
+  const CUSTOMER_API = '../api/customer/get_account.php'; // ensure this path exists or adjust
 
   // Try to reuse helper functions from global scope if present, otherwise use local implementations
   const _resolveImg = window.resolveImg || function (src) {
