@@ -7,25 +7,26 @@
     --page-bg: rgba(127, 85, 57, 0.08);
 }
 
-/* Apply theme to sidebar */
+/* Apply theme to sidebar - OVERRIDE main.css */
 .sidebar {
-    background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 100%) !important;
+    color: white !important;
+    border-right-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .sidebar .nav-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85) !important;
     transition: all 0.3s ease;
 }
 
 .sidebar .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
 }
 
 .sidebar .nav-link.active {
-    background-color: var(--admin-accent);
-    color: #000;
+    background-color: var(--admin-accent) !important;
+    color: #000 !important;
     font-weight: 600;
 }
 
