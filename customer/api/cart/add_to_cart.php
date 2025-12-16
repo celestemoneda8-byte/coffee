@@ -2,8 +2,8 @@
 // api/cart/add_to_cart.php
 header("Content-Type: application/json; charset=utf-8");
 session_start();
-require_once __DIR__ . "/../../../db.php";
-$conn = getConnection();
+require_once __DIR__ . "/../../config/db_connect.php";
+$conn = $conn; // Use the $conn from db_connect.php
 
 // Read JSON payload
 $input = json_decode(file_get_contents('php://input'), true);

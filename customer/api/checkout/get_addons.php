@@ -1,8 +1,8 @@
 <?php
 // Returns all addons as JSON
 header('Content-Type: application/json; charset=utf-8');
-require_once __DIR__ . '/../../../db.php';
-$conn = getConnection();
+require_once __DIR__ . '/../../config/db_connect.php';
+$conn = $conn; // Use the $conn from db_connect.php
 
 try {
     $stmt = $conn->prepare("SELECT addon_id, addon_name, price, COALESCE(image, '') AS image FROM addons ORDER BY addon_name ASC");

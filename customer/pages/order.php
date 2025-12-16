@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db.php";
+require_once "../config/db_connect.php";
 
 // NOTE: this page used $_SESSION['user_id'] previously. We'll expose it to JS as CUSTOMER_ID
 $userId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : 0;

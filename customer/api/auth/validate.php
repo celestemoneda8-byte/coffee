@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . "/../../../db.php";
+require_once __DIR__ . "/../../config/db_connect.php";
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -21,7 +21,7 @@ header('Content-Type: application/json; charset=utf-8');
 $input = json_decode(file_get_contents('php://input'), true) ?? [];
 $action = $input['action'] ?? '';
 
-$conn = getConnection();
+// $conn is available from db_connect.php
 $response = ['success' => false, 'message' => 'Invalid request'];
 
 /* ======= Helpers ======= */

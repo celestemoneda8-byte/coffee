@@ -2,8 +2,8 @@
 // Returns customer's active orders and order history as JSON
 session_start();
 header('Content-Type: application/json; charset=utf-8');
-require_once __DIR__ . "/../../../db.php";
-$conn = getConnection();
+require_once __DIR__ . "/../../config/db_connect.php";
+$conn = $conn; // Use the $conn from db_connect.php
 
 $raw = file_get_contents('php://input');
 $data = json_decode($raw, true);

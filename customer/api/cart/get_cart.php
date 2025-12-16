@@ -2,8 +2,7 @@
 // api/cart/get_cart.php
 header("Content-Type: application/json; charset=utf-8");
 session_start();
-require_once __DIR__ . "/../../../db.php";
-$conn = getConnection();
+require_once __DIR__ . "/../../config/db_connect.php";
 
 // Ensure cart exists
 if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];

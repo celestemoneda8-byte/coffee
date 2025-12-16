@@ -1,12 +1,10 @@
 <?php
 session_start();
-require_once __DIR__ . "/../../../db.php";
+require_once __DIR__ . "/../../config/db_connect.php";
 
 header('Content-Type: application/json; charset=utf-8');
 
-$conn = getConnection();
-
-// Accept either session key to be backward-compatible
+// $conn is available from db_connect.php
 $customerId = $_SESSION['customer_id'] ?? $_SESSION['user_id'] ?? null;
 
 if (!$customerId) {

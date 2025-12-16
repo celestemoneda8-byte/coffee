@@ -1,7 +1,7 @@
 <?php
 // Load saved cart
 session_start();
-require_once "../../db.php";
+require_once "../config/db_connect.php";
 if(!isset($_SESSION['customer_id'])) {
     header('Location: login.php');
     exit;

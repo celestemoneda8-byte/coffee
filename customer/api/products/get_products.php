@@ -1,8 +1,7 @@
 <?php
 session_start();
 header("Content-Type: application/json");
-require_once __DIR__ . "/../../../db.php";
-$conn = getConnection();
+require_once __DIR__ . "/../../config/db_connect.php";
 
 // Default response
 $response = [
