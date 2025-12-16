@@ -129,7 +129,7 @@ document.getElementById("updateProfile").addEventListener("click", async () => {
   btn.disabled = true;
 
   try {
-    const res = await fetch("api/auth/updateProfile.php", {
+    const res = await fetch("../api/auth/updateProfile.php", {
       method: "POST",
       credentials: 'same-origin',
       headers: { "Content-Type": "application/json" },

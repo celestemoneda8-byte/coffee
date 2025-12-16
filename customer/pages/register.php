@@ -83,7 +83,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     conpass: conpass.value
   };
 
-  const res = await fetch("api/auth/validate.php", {
+  const res = await fetch("../api/auth/validate.php", {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify(payload)
