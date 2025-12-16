@@ -58,24 +58,33 @@ document.getElementById("togglePassword").addEventListener("click", function (){
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+
   const payload = {
     action: "login",
-    email: email.value,
-    password: password.value
+    email: emailInput.value,
+    password: passwordInput.value
   };
 
-  const res = await fetch("../api/auth/validate.php", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify(payload)
-  });
+  try {
+    const res = await fetch("../api/auth/validate.php", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    });
 
-  const data = await res.json();
-  document.getElementById("alertBox").innerHTML =
-    `<div class="alert ${data.success?'alert-success':'alert-danger'}">${data.message}</div>`;
+    const data = await res.json();
+    document.getElementById("alertBox").innerHTML =
+      `<div class="alert ${data.success?'alert-success':'alert-danger'}">${data.message}</div>`;
 
-  if (data.success) {
-    setTimeout(() => window.location.href = "index.php", 800);
+    if (data.success) {
+      setTimeout(() => window.location.href = "index.php", 800);
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    document.getElementById("alertBox").innerHTML =
+      `<div class="alert alert-danger">An error occurred. Please try again.</div>`;
   }
 });
 </script>

@@ -51,7 +51,7 @@ session_start();
         <ion-icon id="togglePassword2" name="eye-off-outline"></ion-icon>
       </div>
 
-      <button type="submit" class="btn w-100">Submit</button>
+      <button type="submit" class="btn w-100 btn-login">Submit</button>
       <p class="mt-2">Already have an account? <a href="login.php">Login</a></p>
     </form>
 
@@ -75,26 +75,37 @@ document.getElementById("togglePassword2").addEventListener("click", function ()
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const fullnameInput = document.getElementById("fullname");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const conpassInput = document.getElementById("conpass");
+
   const payload = {
     action: "register",
-    fullname: fullname.value,
-    email: email.value,
-    password: password.value,
-    conpass: conpass.value
+    fullname: fullnameInput.value,
+    email: emailInput.value,
+    password: passwordInput.value,
+    conpass: conpassInput.value
   };
 
-  const res = await fetch("../api/auth/validate.php", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify(payload)
-  });
+  try {
+    const res = await fetch("../api/auth/validate.php", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    });
 
-  const data = await res.json();
-  document.getElementById("alertBox").innerHTML =
-    `<div class="alert ${data.success?'alert-success':'alert-danger'}">${data.message}</div>`;
+    const data = await res.json();
+    document.getElementById("alertBox").innerHTML =
+      `<div class="alert ${data.success?'alert-success':'alert-danger'}">${data.message}</div>`;
 
-  if (data.success) {
-    setTimeout(() => window.location.href = "index.php", 1500);
+    if (data.success) {
+      setTimeout(() => window.location.href = "index.php", 1500);
+    }
+  } catch (error) {
+    console.error('Registration error:', error);
+    document.getElementById("alertBox").innerHTML =
+      `<div class="alert alert-danger">An error occurred. Please try again.</div>`;
   }
 });
 </script>
