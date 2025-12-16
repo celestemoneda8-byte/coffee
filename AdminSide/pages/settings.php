@@ -341,7 +341,7 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const API_URL = './api/settings_api.php';
+        const API_URL = '../api/settings_api.php';
         const colorThemes = <?php echo json_encode($colorThemes); ?>;
         
         let settingsData = {
@@ -492,14 +492,20 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
         // Save all settings
         document.getElementById('saveBtn').addEventListener('click', function() {
             showSpinner('Saving settings...');
+            console.log('Save button clicked. API URL:', API_URL);
+            console.log('Settings data:', settingsData);
             
             fetch(API_URL + '?action=update', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(settingsData)
             })
-            .then(res => res.json())
+            .then(res => {
+                console.log('Response status:', res.status);
+                return res.json();
+            })
             .then(data => {
+                console.log('Response data:', data);
                 if (data.success) {
                     // Apply theme to current page
                     const adminTheme = {
@@ -522,6 +528,7 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                 }
             })
             .catch(err => {
+                console.error('Fetch error:', err);
                 showAlert('Error saving settings: ' + err.message, 'danger');
             })
             .finally(() => hideSpinner());
@@ -532,6 +539,7 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
             if (!confirm('Are you sure you want to restore all settings to default?')) return;
 
             showSpinner('Restoring default settings...');
+            console.log('Restore button clicked. API URL:', API_URL);
             
             const defaultSettings = {
                 website_name: 'EXpresso Caffe',
@@ -546,13 +554,19 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                 rider_accent_color: '#dec0ad'
             };
 
+            console.log('Default settings:', defaultSettings);
+
             fetch(API_URL + '?action=update', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(defaultSettings)
             })
-            .then(res => res.json())
+            .then(res => {
+                console.log('Response status:', res.status);
+                return res.json();
+            })
             .then(data => {
+                console.log('Response data:', data);
                 if (data.success) {
                     showAlert('Settings restored successfully!', 'success');
                     setTimeout(() => location.reload(), 2000);
@@ -561,6 +575,7 @@ $currentUser = $_SESSION['username'] ?? 'Admin';
                 }
             })
             .catch(err => {
+                console.error('Fetch error:', err);
                 showAlert('Error restoring settings: ' + err.message, 'danger');
             })
             .finally(() => hideSpinner());

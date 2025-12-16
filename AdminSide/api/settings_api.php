@@ -12,6 +12,32 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
 
 header('Content-Type: application/json');
 
+// Ensure app_settings table exists
+function ensureAppSettingsTable($conn) {
+    $result = $conn->query("SHOW TABLES LIKE 'app_settings'");
+    if ($result->num_rows === 0) {
+        $createSQL = "CREATE TABLE IF NOT EXISTS app_settings (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            setting_key VARCHAR(255) NOT NULL UNIQUE,
+            setting_value LONGTEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+        
+        if (!$conn->query($createSQL)) {
+            throw new Exception("Failed to create app_settings table: " . $conn->error);
+        }
+    }
+}
+
+try {
+    ensureAppSettingsTable($conn);
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+    exit;
+}
+
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
 
 if ($action === 'upload_logo') {
