@@ -61,7 +61,7 @@ require_once "../config/db_connect.php";
           “Want a productive day? Get a shot of Expresso Coffee.”
         </p>
 
-        <a href="<?= isset($_SESSION['user_id']) ? 'menu.php' : 'register.php' ?>" id="orderNowBtn" class="cssbuttonsIoButton text-decoration-none">
+        <a href="<?= isset($_SESSION['customer_id']) ? 'menu.php' : 'register.php' ?>" id="orderNowBtn" class="cssbuttonsIoButton text-decoration-none">
           Order Now!
           <div class="icon">
             <svg height="24" width="24" viewBox="0 0 24 24">
@@ -135,20 +135,12 @@ require_once "../config/db_connect.php";
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// YOUR SAME JAVASCRIPT HERE (quantity buttons)
-document.querySelectorAll("#bestSelling .card").forEach(card => {
-  const qtyText = card.querySelector(".quantity");
-  const minusBTN = card.querySelector(".minus-btn");
-  const plusBTN = card.querySelector(".plus-btn");
-
-  minusBTN.addEventListener("click", () => {
-    let qty = parseInt(qtyText.textContent);
-    if (qty > 1) qtyText.textContent = qty - 1;
-  });
-
-  plusBTN.addEventListener("click", () => {
-    let qty = parseInt(qtyText.textContent);
-    qtyText.textContent = qty + 1;
+// Handle category button clicks to navigate to menu with selected category
+document.querySelectorAll(".category-btn").forEach(btn => {
+  btn.addEventListener("click", function() {
+    const category = this.getAttribute("data-category");
+    // Redirect to menu page with category parameter
+    window.location.href = `menu.php?category=${encodeURIComponent(category)}`;
   });
 });
 </script>

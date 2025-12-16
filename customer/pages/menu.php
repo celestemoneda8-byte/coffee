@@ -26,6 +26,22 @@ $cart = $_SESSION['cart'] ?? [];
 
 <?php
 $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
+$selectedCategory = isset($_GET['category']) ? trim($_GET['category']) : 'all';
+
+// Map friendly category names to exact database category names
+$categoryMap = [
+    'cappuccino' => 'Cappuccino',
+    'espresso' => 'Espresso',
+    'mocha' => 'Mocha',
+    'latte' => 'Latte',
+    'ice-coffee' => 'Ice Coffee',
+    'americano' => 'Americano'
+];
+
+// Convert friendly URL param to exact category name
+if (isset($categoryMap[$selectedCategory])) {
+    $selectedCategory = $categoryMap[$selectedCategory];
+}
 ?>
 
 <main id="menu-page">
@@ -33,13 +49,13 @@ $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
 
     <!-- CATEGORY FILTER -->
     <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
-        <button class="btn filter-btn active" data-category="all">All</button>
-        <button class="btn filter-btn" data-category="Cappuccino">Cappuccino</button>
-        <button class="btn filter-btn" data-category="Espresso">Espresso</button>
-        <button class="btn filter-btn" data-category="Mocha">Mocha</button>
-        <button class="btn filter-btn" data-category="Latte">Latte</button>
-        <button class="btn filter-btn" data-category="Ice Coffee">Ice Coffee</button>
-        <button class="btn filter-btn" data-category="Americano">Americano</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'all' ? 'active' : '' ?>" data-category="all">All</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'Cappuccino' ? 'active' : '' ?>" data-category="Cappuccino">Cappuccino</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'Espresso' ? 'active' : '' ?>" data-category="Espresso">Espresso</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'Mocha' ? 'active' : '' ?>" data-category="Mocha">Mocha</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'Latte' ? 'active' : '' ?>" data-category="Latte">Latte</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'Ice Coffee' ? 'active' : '' ?>" data-category="Ice Coffee">Ice Coffee</button>
+        <button class="btn filter-btn <?= $selectedCategory === 'Americano' ? 'active' : '' ?>" data-category="Americano">Americano</button>
     </div>
 
     <!-- COFFEE LIST -->
@@ -50,8 +66,23 @@ $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   const searchQuery = <?php echo json_encode($searchQuery); ?>;
+  const selectedCategory = <?php echo json_encode($selectedCategory); ?>;
 </script>
 <script src="../js/main.js"></script>
+<script>
+  // Auto-select category from URL parameter
+  document.addEventListener('DOMContentLoaded', function() {
+    if (selectedCategory && selectedCategory !== 'all') {
+      const categoryBtn = document.querySelector(`[data-category="${selectedCategory}"]`);
+      if (categoryBtn) {
+        // Ensure products are loaded first
+        setTimeout(() => {
+          categoryBtn.click();
+        }, 100);
+      }
+    }
+  });
+</script>
 <?php require_once 'footer.php'; ?>
 </body>
 </html>
