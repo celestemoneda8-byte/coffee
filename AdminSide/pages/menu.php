@@ -65,7 +65,7 @@ $currentUser = htmlspecialchars($_SESSION['username'] ?? 'Admin');
   <link rel="stylesheet" href="../css/theme.css?v=1.0">
   
   <!-- Load Theme Colors -->
-  <?php include '../includes/theme-loader.php'; ?>
+  <?php include '../includes/theme_loader.php'; ?>
 </head>
 <body>
   <div class="d-flex min-vh-100">
