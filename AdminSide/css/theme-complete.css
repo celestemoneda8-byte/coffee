@@ -5,6 +5,15 @@
  */
 
 :root {
+    /* Coffee Theme Colors */
+    --almond: #ede0d4;
+    --dun: #e6ccb2;
+    --tan: #ddb892;
+    --chamoisee: #b08968;
+    --coffee: #7f5539;
+    --muted: #9a8b7b;
+    --bg: #f6e9d6;
+    
     /* Primary Colors - Main theme color */
     --admin-primary: #7f5539;
     --admin-primary-light: #9d6f4d;
