@@ -1,0 +1,724 @@
+/* ============================================
+   BOOTSTRAP 5 CUSTOMIZATION
+   EXpresso Coffee Admin Panel Theme
+   ============================================ */
+
+:root {
+  /* Bootstrap Color Override */
+  --bs-primary: #7f5539;
+  --bs-primary-rgb: 127, 85, 57;
+  --bs-secondary: #b08968;
+  --bs-secondary-rgb: 176, 137, 104;
+  --bs-success: #28a745;
+  --bs-success-rgb: 40, 167, 69;
+  --bs-danger: #dc3545;
+  --bs-danger-rgb: 220, 53, 69;
+  --bs-warning: #ffc107;
+  --bs-warning-rgb: 255, 193, 7;
+  --bs-info: #17a2b8;
+  --bs-info-rgb: 23, 162, 184;
+  --bs-light: #f6e9d6;
+  --bs-light-rgb: 246, 233, 214;
+  --bs-dark: #2c2c2c;
+  --bs-dark-rgb: 44, 44, 44;
+  
+  /* Bootstrap Border and Shadow */
+  --bs-border-color: #ddb892;
+  --bs-border-color-translucent: rgba(127, 85, 57, 0.175);
+  --bs-box-shadow: 0 4px 6px rgba(127, 85, 57, 0.1);
+  --bs-box-shadow-sm: 0 1px 2px rgba(127, 85, 57, 0.1);
+  --bs-box-shadow-lg: 0 10px 15px rgba(127, 85, 57, 0.1);
+  
+  /* Bootstrap Spacing */
+  --bs-border-radius: 0.5rem;
+  --bs-border-radius-sm: 0.25rem;
+  --bs-border-radius-lg: 1rem;
+  --bs-border-radius-xl: 1.5rem;
+  --bs-border-radius-xxl: 2rem;
+}
+
+/* ============================================
+   BUTTON CUSTOMIZATION
+   ============================================ */
+
+.btn {
+  border-radius: var(--bs-border-radius-lg);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%);
+  border-color: #7f5539;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #6b4423 0%, #5a3a1a 100%);
+  border-color: #6b4423;
+  color: white;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  background: linear-gradient(135deg, #6b4423 0%, #5a3a1a 100%);
+  border-color: #6b4423;
+  box-shadow: 0 0 0 0.25rem rgba(127, 85, 57, 0.5);
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background: #5a3a1a;
+  border-color: #5a3a1a;
+}
+
+.btn-secondary {
+  background-color: #b08968;
+  border-color: #b08968;
+}
+
+.btn-secondary:hover {
+  background-color: #a67c52;
+  border-color: #a67c52;
+}
+
+.btn-outline-primary {
+  color: #7f5539;
+  border-color: #7f5539;
+}
+
+.btn-outline-primary:hover {
+  background-color: #7f5539;
+  border-color: #7f5539;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+  box-shadow: 0 0 0 0.25rem rgba(127, 85, 57, 0.5);
+}
+
+.btn-group-vertical .btn-primary,
+.btn-group .btn-primary {
+  border-color: #7f5539;
+}
+
+/* ============================================
+   CARD CUSTOMIZATION
+   ============================================ */
+
+.card {
+  border: 1px solid #ddb892;
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: var(--bs-box-shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--bs-box-shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%);
+  border-bottom: 2px solid #ddb892;
+  color: white;
+  font-weight: 600;
+  border-radius: var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0 0;
+}
+
+.card-header.bg-primary {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%) !important;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: #7f5539;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  color: #666;
+}
+
+/* ============================================
+   BADGE CUSTOMIZATION
+   ============================================ */
+
+.badge {
+  border-radius: var(--bs-border-radius-md);
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+}
+
+.badge.bg-primary {
+  background-color: #7f5539 !important;
+}
+
+.badge.bg-secondary {
+  background-color: #b08968 !important;
+}
+
+.badge.bg-light {
+  background-color: #f6e9d6 !important;
+  color: #7f5539;
+}
+
+.badge.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+/* ============================================
+   TABLE CUSTOMIZATION
+   ============================================ */
+
+.table {
+  border-radius: var(--bs-border-radius-lg);
+  overflow: hidden;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%);
+  color: white;
+  font-weight: 600;
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  padding: 1rem;
+}
+
+.table tbody td {
+  padding: 1rem;
+  border-color: #ddb892;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f6e9d6;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(246, 233, 214, 0.3);
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f6e9d6;
+  color: #7f5539;
+}
+
+/* ============================================
+   FORM CUSTOMIZATION
+   ============================================ */
+
+.form-control,
+.form-select {
+  border: 2px solid #ddb892;
+  border-radius: var(--bs-border-radius-lg);
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #7f5539;
+  box-shadow: 0 0 0 0.25rem rgba(127, 85, 57, 0.25);
+  color: #2c2c2c;
+}
+
+.form-control::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.form-label {
+  color: #7f5539;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.input-group-text {
+  background-color: #f6e9d6;
+  border: 2px solid #ddb892;
+  color: #7f5539;
+  font-weight: 600;
+}
+
+.form-check-input {
+  border: 2px solid #ddb892;
+  border-radius: 0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.form-check-input:checked {
+  background-color: #7f5539;
+  border-color: #7f5539;
+}
+
+.form-check-input:focus {
+  border-color: #7f5539;
+  box-shadow: 0 0 0 0.25rem rgba(127, 85, 57, 0.25);
+}
+
+/* ============================================
+   ALERT CUSTOMIZATION
+   ============================================ */
+
+.alert {
+  border: 1px solid;
+  border-left: 4px solid;
+  border-radius: var(--bs-border-radius-lg);
+  padding: 1rem 1.5rem;
+}
+
+.alert-primary {
+  background-color: rgba(127, 85, 57, 0.1);
+  border-color: #7f5539;
+  color: #7f5539;
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-color: #28a745;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-color: #ffc107;
+  color: #856404;
+}
+
+.alert-info {
+  background-color: rgba(23, 162, 184, 0.1);
+  border-color: #17a2b8;
+  color: #0c5460;
+}
+
+.alert-link {
+  color: #7f5539;
+  font-weight: 600;
+}
+
+/* ============================================
+   MODAL CUSTOMIZATION
+   ============================================ */
+
+.modal-content {
+  border: none;
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%);
+  color: white;
+  border: none;
+  border-radius: var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0 0;
+  padding: 1.5rem;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.modal-header .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid #ddb892;
+  padding: 1rem 1.5rem;
+}
+
+/* ============================================
+   PAGINATION CUSTOMIZATION
+   ============================================ */
+
+.pagination {
+  gap: 0.25rem;
+}
+
+.page-link {
+  color: #7f5539;
+  border: 2px solid #ddb892;
+  border-radius: var(--bs-border-radius-md);
+  transition: all 0.2s ease;
+  padding: 0.5rem 0.75rem;
+}
+
+.page-link:hover {
+  background-color: #7f5539;
+  color: white;
+  border-color: #7f5539;
+}
+
+.page-item.active .page-link {
+  background-color: #7f5539;
+  border-color: #7f5539;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  color: #999;
+  border-color: #ddd;
+}
+
+/* ============================================
+   PROGRESS CUSTOMIZATION
+   ============================================ */
+
+.progress {
+  background-color: #e9ecef;
+  border-radius: var(--bs-border-radius-lg);
+  height: 1.5rem;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #7f5539 0%, #6b4423 100%);
+  font-weight: 600;
+  color: white;
+}
+
+/* ============================================
+   NAVIGATION CUSTOMIZATION
+   ============================================ */
+
+.navbar {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%);
+  border-bottom: 2px solid #ddb892;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: white !important;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: white !important;
+}
+
+.nav-link.active {
+  color: white !important;
+  border-bottom: 2px solid #ddb892;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ============================================
+   DROPDOWN CUSTOMIZATION
+   ============================================ */
+
+.dropdown-menu {
+  border-radius: var(--bs-border-radius-lg);
+  border: 1px solid #ddb892;
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+.dropdown-item {
+  color: #2c2c2c;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #f6e9d6;
+  color: #7f5539;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #7f5539;
+  color: white;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #ddb892;
+}
+
+/* ============================================
+   LIST GROUP CUSTOMIZATION
+   ============================================ */
+
+.list-group-item {
+  border-color: #ddb892;
+  color: #2c2c2c;
+}
+
+.list-group-item:hover {
+  background-color: #f6e9d6;
+}
+
+.list-group-item.active {
+  background-color: #7f5539;
+  border-color: #7f5539;
+}
+
+/* ============================================
+   TOOLTIP & POPOVER CUSTOMIZATION
+   ============================================ */
+
+.tooltip-inner {
+  background-color: #7f5539;
+  border-radius: var(--bs-border-radius-md);
+  padding: 0.75rem;
+}
+
+.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: #7f5539;
+}
+
+.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: #7f5539;
+}
+
+.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: #7f5539;
+}
+
+.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: #7f5539;
+}
+
+.popover {
+  border: 1px solid #ddb892;
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+.popover-header {
+  background-color: #7f5539;
+  color: white;
+  border: none;
+  border-radius: var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0 0;
+  font-weight: 600;
+}
+
+/* ============================================
+   BREADCRUMB CUSTOMIZATION
+   ============================================ */
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+}
+
+.breadcrumb-item {
+  color: #666;
+}
+
+.breadcrumb-item.active {
+  color: #7f5539;
+  font-weight: 600;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: #b08968;
+}
+
+/* ============================================
+   TABS CUSTOMIZATION
+   ============================================ */
+
+.nav-tabs {
+  border-bottom: 2px solid #ddb892;
+}
+
+.nav-tabs .nav-link {
+  color: #666;
+  border: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom-color: #b08968;
+  color: #7f5539;
+}
+
+.nav-tabs .nav-link.active {
+  background: transparent;
+  color: #7f5539;
+  border-bottom-color: #7f5539;
+  font-weight: 600;
+}
+
+/* ============================================
+   SPINNER CUSTOMIZATION
+   ============================================ */
+
+.spinner-border {
+  border-color: #f6e9d6;
+  border-right-color: #7f5539;
+}
+
+.spinner-grow {
+  background-color: #7f5539;
+}
+
+/* ============================================
+   OFFCANVAS CUSTOMIZATION
+   ============================================ */
+
+.offcanvas {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%);
+  color: white;
+}
+
+.offcanvas-header {
+  border-bottom: 2px solid #ddb892;
+}
+
+.offcanvas-title {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.btn-close {
+  filter: brightness(0) invert(1);
+}
+
+/* ============================================
+   UTILITY OVERRIDES
+   ============================================ */
+
+.text-primary {
+  color: #7f5539 !important;
+}
+
+.text-secondary {
+  color: #b08968 !important;
+}
+
+.text-muted {
+  color: #999 !important;
+}
+
+.bg-primary {
+  background-color: #7f5539 !important;
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(135deg, #7f5539 0%, #6b4423 100%) !important;
+}
+
+.bg-secondary {
+  background-color: #b08968 !important;
+}
+
+.bg-light {
+  background-color: #f6e9d6 !important;
+}
+
+.border-primary {
+  border-color: #7f5539 !important;
+}
+
+.border-secondary {
+  border-color: #b08968 !important;
+}
+
+.border-light {
+  border-color: #ddb892 !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--bs-box-shadow-sm) !important;
+}
+
+.shadow {
+  box-shadow: var(--bs-box-shadow) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--bs-box-shadow-lg) !important;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .table {
+    font-size: 0.85rem;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.75rem;
+  }
+  
+  .modal-header {
+    padding: 1rem;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .badge {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .table {
+    font-size: 0.8rem;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.5rem;
+  }
+}

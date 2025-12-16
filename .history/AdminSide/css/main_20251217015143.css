@@ -1,0 +1,404 @@
+:root{
+  --almond:#ede0d4;
+  --dun:#e6ccb2;
+  --tan:#ddb892;
+  --chamoisee:#b08968;
+  --coffee:#7f5539;
+  --muted:#9a8b7b;
+  --bg:#f6e9d6;
+  --card-shadow: rgba(127,85,57,0.06);
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, var(--coffee-lightest) 0%, #f0dcc2 100%);
+  color: var(--coffee-primary);
+  min-height: 100vh;
+}
+
+/* ========================================
+   LAYOUT STRUCTURE
+   ======================================== */
+.d-flex.min-vh-100 {
+  min-height: 100vh;
+  display: flex;
+}
+
+main.flex-fill {
+  flex: 1;
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%);
+}
+
+/* ========================================
+   SIDEBAR STYLES
+   ======================================== */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border-right: 1px solid var(--border-light);
+  box-shadow: 4px 0 12px var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+  z-index: 1020;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--coffee-light);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--coffee-secondary);
+}
+
+/* Sidebar Top */
+.sidebar-top {
+  padding: 24px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.95));
+}
+
+.sidebar-top .brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--coffee-primary);
+  font-family: 'Georgia', serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sidebar-top .brand i {
+  font-size: 1.8rem;
+}
+
+.sidebar-top .text-muted {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav .nav-link:hover {
+  background: rgba(127, 85, 57, 0.08);
+  color: var(--coffee-primary);
+  border-left-color: var(--coffee-primary);
+  transform: translateX(4px);
+}
+
+.sidebar-nav .nav-link.active {
+  background: rgba(127, 85, 57, 0.12);
+  color: var(--coffee-primary);
+  border-left-color: var(--coffee-primary);
+  font-weight: 600;
+}
+
+.sidebar-nav .nav-link i {
+  font-size: 1.1rem;
+  min-width: 20px;
+}
+
+/* Sidebar Spacer */
+.sidebar-spacer {
+  flex: 1;
+}
+
+/* Logout Link */
+.logout-link {
+  margin-top: auto;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+  color: #d9534f !important;
+}
+
+.logout-link:hover {
+  background: rgba(217, 83, 79, 0.1) !important;
+  color: #c9302c !important;
+}
+
+/* ========================================
+   HEADER STYLES
+   ======================================== */
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--coffee-primary);
+  margin-bottom: 0;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(127, 85, 57, 0.05);
+  border-radius: 8px;
+}
+
+.user-badge .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--coffee-secondary), var(--coffee-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+.card {
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px var(--shadow-light);
+  border-color: rgba(127, 85, 57, 0.15);
+}
+
+.card-header {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+  border-bottom: 1px solid var(--border-light);
+  font-weight: 600;
+}
+
+.card-body {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--coffee-primary), var(--coffee-secondary));
+  border-color: var(--coffee-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #6b3d2d, #9a7860);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(127, 85, 57, 0.3);
+}
+
+.btn-outline-primary {
+  color: var(--coffee-primary);
+  border-color: var(--coffee-primary);
+}
+
+.btn-outline-primary:hover {
+  background: rgba(127, 85, 57, 0.1);
+  border-color: var(--coffee-primary);
+}
+
+.btn-outline-secondary {
+  color: #666;
+  border-color: #ddd;
+}
+
+.btn-outline-secondary:hover {
+  background: #f9f9f9;
+  border-color: #999;
+}
+
+/* ========================================
+   TABLE STYLES
+   ======================================== */
+.table {
+  margin-bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.table thead {
+  background: linear-gradient(135deg, rgba(127, 85, 57, 0.08), rgba(127, 85, 57, 0.04));
+  font-weight: 600;
+}
+
+.table thead th {
+  border-color: var(--border-light);
+  color: var(--coffee-primary);
+  padding: 12px 16px;
+}
+
+.table tbody td {
+  border-color: var(--border-light);
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background: rgba(127, 85, 57, 0.04);
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+.form-control, .form-select {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--coffee-primary);
+  box-shadow: 0 0 0 0.2rem rgba(127, 85, 57, 0.15);
+}
+
+/* ========================================
+   ALERT STYLES
+   ======================================== */
+.alert {
+  border: none;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.alert-success {
+  background: rgba(92, 184, 92, 0.1);
+  color: #2d5a2d;
+  border-left-color: #5cb85c;
+}
+
+.alert-danger {
+  background: rgba(217, 83, 79, 0.1);
+  color: #722c2a;
+  border-left-color: #d9534f;
+}
+
+.alert-warning {
+  background: rgba(240, 173, 78, 0.1);
+  color: #7d5a2e;
+  border-left-color: #f0ad4e;
+}
+
+.alert-info {
+  background: rgba(91, 192, 235, 0.1);
+  color: #2d5a7a;
+  border-left-color: #5bc0de;
+}
+
+/* ========================================
+   FOOTER STYLES
+   ======================================== */
+.admin-footer {
+  background: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid var(--border-light);
+  padding-top: 24px;
+  padding-bottom: 20px;
+  margin-top: auto;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.text-muted {
+  color: #999 !important;
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 1050;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  .sidebar, .admin-footer {
+    display: none;
+  }
+}
