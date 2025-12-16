@@ -6,11 +6,11 @@ const injectedSearchQuery = (typeof searchQuery !== 'undefined') ? String(search
 
 // -------- HELPERS --------
 function resolveImg(src) {
-    const fallback = 'images/coffee.jpg';
+    const fallback = '../images/coffee.jpg';
     if (!src) return fallback;
     if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) return src;
-    if (src.startsWith('images/')) return src;
-    return `images/${src}`;
+    if (src.startsWith('../images/')) return src;
+    return `../images/${src}`;
 }
 
 function escapeHtml(s) {
@@ -748,11 +748,11 @@ window.addEventListener('load', mainInit);
 
   // Try to reuse helper functions from global scope if present, otherwise use local implementations
   const _resolveImg = window.resolveImg || function (src) {
-    const fallback = 'images/coffee.jpg';
+    const fallback = '../images/coffee.jpg';
     if (!src) return fallback;
     if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) return src;
-    if (src.startsWith('images/')) return src;
-    return `images/${src}`;
+    if (src.startsWith('../images/')) return src;
+    return `../images/${src}`;
   };
   const _escapeHtml = window.escapeHtml || function (s) {
     return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);

@@ -62,7 +62,7 @@ body {
     white-space: nowrap;
 }
 .container{
-  background: url('images/expresso-background.jpg');
+  background: url('../images/expresso-background.jpg');
   background-position: center left;
   background-size: cover;
   background-attachment: fixed;

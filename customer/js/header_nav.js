@@ -8,11 +8,11 @@ function updateCartBadge(count) {
 
 // Resolve image path: accept full path or filename stored in DB
 function resolveImg(src) {
-    const fallback = 'images/coffee.jpg';
+    const fallback = '../images/coffee.jpg';
     if (!src) return fallback;
     if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) return src;
-    if (src.startsWith('images/')) return src;
-    return `images/${src}`;
+    if (src.startsWith('../images/')) return src;
+    return `../images/${src}`;
 }
 
 // --- FETCH CART COUNT FROM SERVER ---
