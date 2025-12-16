@@ -50,12 +50,12 @@ require_once "../config/db_connect.php";
 
     <!-- FIRST SLIDE (Logo + tagline + button) -->
     <div class="carousel-item active">
-      <img src="images/expresso-background.jpg" class="d-block w-100" style="height: 93vh; object-fit: cover;">
+      <img src="../images/expresso-background.jpg" class="d-block w-100" style="height: 93vh; object-fit: cover;">
 
       <div class="carousel-caption d-flex flex-column justify-content-center align-items-start"
            style="top: 50%; transform: translateY(-50%); text-align: left;">
 
-        <img src="images/expresso-logo.png" class="home-img mb-1" style="width: 700px;">
+        <img src="../images/expresso-logo.png" class="home-img mb-1" style="width: 700px;">
 
         <p class="home-tagline fs-4 mb-3">
           “Want a productive day? Get a shot of Expresso Coffee.”
@@ -76,12 +76,12 @@ require_once "../config/db_connect.php";
 
     <!-- SECOND SLIDE (Blank for now, you can change image) -->
     <div class="carousel-item">
-      <img src="images/carousel-image2.jpg" class="d-block w-100" style="height: 93vh; object-fit: cover;">
+      <img src="../images/carousel-image2.jpg" class="d-block w-100" style="height: 93vh; object-fit: cover;">
     </div>
 
     <!-- THIRD SLIDE (Blank for now, you can change image) -->
     <div class="carousel-item">
-      <img src="images/carousel-image3.jpg" class="d-block w-100" style="height: 93vh; object-fit: cover;">
+      <img src="../images/carousel-image3.jpg" class="d-block w-100" style="height: 93vh; object-fit: cover;">
     </div>
 
   </div>
@@ -108,27 +108,27 @@ require_once "../config/db_connect.php";
   <div class="menu-categories d-flex justify-content-center flex-wrap gap-4 mb-5">
     <!-- SAME AS YOUR HTML -->
     <div class="menu-item text-center category-btn" data-category="cappuccino">
-      <img src="images/cappuccino.jpg"><p>Cappuccino</p>
+      <img src="../images/cappuccino.jpg"><p>Cappuccino</p>
     </div>
 
     <div class="menu-item text-center category-btn" data-category="espresso">
-      <img src="images/espresso.jpg"><p>Espresso</p>
+      <img src="../images/espresso.jpg"><p>Espresso</p>
     </div>
 
     <div class="menu-item text-center category-btn" data-category="mocha">
-      <img src="images/mocha.jpg"><p>Mocha</p>
+      <img src="../images/mocha.jpg"><p>Mocha</p>
     </div>
 
     <div class="menu-item text-center category-btn" data-category="latte">
-      <img src="images/latte.jpg"><p>Latte</p>
+      <img src="../images/latte.jpg"><p>Latte</p>
     </div>
 
     <div class="menu-item text-center category-btn" data-category="ice-coffee">
-      <img src="images/ice-coffee.jpg"><p>Ice Coffee</p>
+      <img src="../images/ice-coffee.jpg"><p>Ice Coffee</p>
     </div>
 
     <div class="menu-item text-center category-btn" data-category="americano">
-      <img src="images/americano.jpg"><p>Americano</p>
+      <img src="../images/americano.jpg"><p>Americano</p>
     </div>
   </div>
 </section>
