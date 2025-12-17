@@ -1,0 +1,174 @@
+/* ===== FOOTER STYLES - Expresso Café ===== */
+
+.footer {
+  background: #3e2723 !important;
+  color: #f5e6d8 !important;
+  padding: 60px 0 30px !important;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Layout */
+.footer .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* Brand Section */
+.footer-title {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-subtitle {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #d4a574 !important;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Text */
+.footer p {
+  color: #e8ddd5 !important;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer p i {
+  color: #d4a574 !important;
+  width: 20px;
+}
+
+/* Links */
+.footer-links {
+  list-style: none !important;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-link {
+  color: #e8ddd5 !important;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  gap: 6px;
+}
+
+.footer-link::before {
+  content: "→";
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #d4a574;
+  padding-left: 8px;
+}
+
+.footer-link:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Social Icons */
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5e6d8;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #d4a574;
+  color: #3e2723;
+  transform: translateY(-4px);
+}
+
+/* Divider */
+.footer-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212, 165, 116, 0.5), transparent);
+  margin: 40px 0 20px;
+}
+
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  color: #8d7b6e;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 0 25px;
+  }
+  
+  .footer .row {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+  
+  .footer-section {
+    min-width: 100%;
+  }
+  
+  .footer-title {
+    justify-content: center;
+  }
+  
+  .footer-social {
+    justify-content: center;
+  }
+  
+  .footer-link::before {
+    display: none;
+  }
+  
+  .footer-link:hover {
+    padding-left: 0;
+  }
+}

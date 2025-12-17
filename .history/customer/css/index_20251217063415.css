@@ -1,0 +1,406 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #eacdb9;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+.navbar-menu {
+  width: 100%;
+  background: var(--theme-primary, #3e2723) !important;
+  color: var(--theme-text-light, #f5e6d8);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.navbar-brand{
+  font-weight: bolder;
+  color: var(--theme-text-light, #f5e6d8) !important;
+}
+.nav-btn {
+  font-weight: bolder;
+  border-color: var(--theme-accent, #d4a574) !important;
+  color: var(--theme-text-light, #f5e6d8) !important;    
+  border-radius: 10px;
+}
+.nav-btn:hover {
+  background-color: var(--theme-secondary, #5d4037) !important;
+  color: var(--theme-accent, #d4a574) !important;
+  border-radius: 10px;
+}
+
+.btn-login {
+  background-color: var(--theme-accent, #d4a574) !important;
+  color: var(--theme-primary, #3e2723) !important;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-login:hover {
+  background-color: var(--theme-secondary, #5d4037) !important;
+  box-shadow: 0 0 0 5px rgba(176, 123, 86, 0.37);
+  color: var(--theme-text-light, #f5e6d8) !important;
+}
+.navbar-dark .navbar-toggler-icon {
+    filter: invert(1);
+}
+.navbar-nav .nav-item {
+    margin-right: 8px;
+}
+.nav-btn, .btn-login {
+    white-space: nowrap;
+}
+.container{
+  background: url('../images/expresso-background.jpg');
+  background-position: center left;
+  background-size: cover;
+  background-attachment: fixed;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+#homeCarousel .carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  text-align: left;
+  max-width: 520px;
+  margin-left: 0;
+}
+.home-img {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+}
+.home-tagline {
+  margin: 0;
+  font-family: cursive;
+  color: #231103;
+  font-weight: bold;
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+.cssbuttonsIoButton {
+  background: #3e2723;
+  color: #e29a66;
+  font-family: inherit;
+  border: 1px solid #b07b56;
+  width: fit-content;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 2rem;
+  letter-spacing: 0.05em;
+  display: inline-flex;     /* fix shrinking */
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-left: 1.2rem;
+  padding-right: 3.2rem;
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.cssbuttonsIoButton .icon {
+  background: #ddb394;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 2rem;
+  right: 0.35em;
+  transition: background-position 0.5s ease-out, border 0.2s ease-out, color 0.5s ease-out;
+}
+
+/* --- HOME CAROUSEL CAPTION POSITION --- */
+#homeCarousel .carousel-caption {
+  position: absolute;
+  top: 42%;
+  left: 8%;
+  transform: translateY(-50%);
+  text-align: left;
+  max-width: 500px;
+}
+
+.home-img {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+}
+
+.home-tagline {
+  margin: 0;
+  font-family: cursive;
+  color: #231103;
+  font-weight: bold;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* Responsive logo and caption */
+@media (max-width: 768px) {
+  #homeCarousel .carousel-caption {
+    left: 5%;
+    max-width: 90%;
+  }
+  .home-img {
+    width: 150px;
+  }
+  .home-tagline {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-img {
+    width: 120px;
+  }
+  .home-tagline {
+    font-size: 0.9rem;
+  }
+}
+
+.cssbuttonsIoButton {
+  background: #3e2723;
+  color: #e29a66;
+  font-family: inherit;
+  border: 1px solid #b07b56;
+  width: fit-content;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 2rem;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  position: relative;
+  min-height: 3.1em;      /* FIX BUTTON VISIBILITY */
+  padding-left: 1.2rem;
+  padding-right: 3.2rem;
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.cssbuttonsIoButton .icon {
+  background: #ddb394;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 2rem;
+  right: 0.35em;
+}
+
+
+.cssbuttonsIoButton:hover {
+  background-color: #e29a66;
+  color: #231103;
+  border: 1px solid #3e2723;
+}
+.cssbuttonsIoButton .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+  color: #231103;
+}
+.cssbuttonsIoButton:active .icon {
+  transform: scale(0.95);
+}
+.title {
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+
+/* MENU SECTION */
+.menu-title-custom {
+  font-weight: 700;
+  color: #3e2723;
+  font-family: cursive;
+  margin: 0; /* remove default p margin */
+  font-size: 50px;
+}
+.menu-subtitle {
+  color: #231103;
+  font-size: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+/* Category Icons */
+.menu-item img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.menu-item p {
+  margin-top: 8px;
+  font-weight: 600;
+  color: #3e2723;
+}
+.menu-item:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.menu-categories{
+  padding-top: 20px;
+}
+
+.best-selling{
+  margin: 0;
+  padding: 10px;
+}
+.best-selling h3{
+  font-family: cursive;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #231103;
+  margin-bottom: 5px;
+  padding-bottom: 20px;
+}
+/* Dish Cards */
+.dish-card {
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dish-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.dish-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+
+
+/* ===== Footer Styling ===== */
+.footer-link {
+  color: #d7ccc8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.social-icon {
+  display: inline-block;
+  color: #d7ccc8;
+  font-size: 1.3rem;
+  margin-right: 12px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+footer h4, footer h5 {
+  color: #fff;
+}
+
+
+/* Best Selling Card Background */
+#bestSelling .card {
+    background-color: #fdf0d5 !important;
+    border: none;
+    border-radius: 12px;
+}
+#bestSelling .card .btn-primary {
+    background-color: #3e2723;
+    border-color: #3e2723;
+}
+#bestSelling .card .btn-success {
+    background-color: #b07b56;
+    border-color: #b07b56;
+}
+
+
+/* --- RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+
+  #homeCarousel .carousel-caption {
+    left: 5%;
+    max-width: 85%;
+  }
+
+  .home-img {
+    width: 170px;
+  }
+
+  .home-tagline {
+    font-size: 1.2rem;
+  }
+
+  .cssbuttonsIoButton {
+    font-size: 15px;
+    padding-left: 1rem;
+    padding-right: 3rem;
+    height: 2.6em;
+  }
+
+  .cssbuttonsIoButton .icon {
+    height: 2em;
+    width: 2em;
+  }
+
+  .navbar .d-flex.align-items-center {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  .btn-login {
+    display: inline-block !important;
+  }
+
+  .menu-item img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .dish-card img {
+    height: 150px;
+  }
+
+  .menu-subtitle { 
+    font-size: 14px;
+  }
+
+  .container {
+    padding: auto 20px;
+  }
+}

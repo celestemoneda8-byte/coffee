@@ -1,0 +1,173 @@
+/* Menu Page Container */
+#menu-page {
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 100px;
+  max-width: 1400px;
+}
+
+/* Grid Item */
+.grid-item {
+  width: 100%;
+  height: 100%;
+}
+
+/* Product Grid - 4 columns */
+#coffee-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Loading state */
+#coffee-list:empty::before {
+  content: 'Loading products...';
+  text-align: center;
+  color: #888;
+  padding: 40px;
+  grid-column: 1 / -1;
+}
+
+/* Category Filter Buttons */
+.filter-btn {
+  background: transparent;
+  border: 1px solid #e6d8c8;
+  color: #3b2b24;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+.filter-btn.active {
+  background: #f0d9c0;
+  border-color: #d6b89d;
+}
+
+/* ========== PRODUCT CARD - FIXED SIZE ========== */
+#menu-page .coffee-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Image - Fixed Height */
+#menu-page .coffee-card-image {
+  width: 100%;
+  height: 180px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #f5f0eb;
+}
+#menu-page .coffee-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card Body */
+#menu-page .coffee-card-body {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Product Name */
+#menu-page .coffee-name {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b2b24;
+  line-height: 1.3;
+  height: 36px;
+  overflow: hidden;
+}
+
+/* Product Price */
+#menu-page .coffee-price {
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #b07a53;
+}
+
+/* Quantity Controls */
+#menu-page .qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+#menu-page .qty-controls button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#menu-page .quantity {
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Action Buttons - Side by Side */
+#menu-page .coffee-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+}
+#menu-page .coffee-card-actions .btn {
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+#menu-page .coffee-card-actions .btn-primary {
+  background: #3e2723;
+}
+#menu-page .coffee-card-actions .btn-success {
+  background: #b07a53;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1200px) {
+  #coffee-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  #coffee-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  #coffee-list {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+  }
+  #menu-page .coffee-card {
+    height: 360px;
+  }
+}

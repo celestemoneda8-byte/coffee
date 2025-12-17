@@ -1,0 +1,143 @@
+/* Dynamic Theme System for Admin Dashboard */
+
+:root {
+    --admin-primary: #7f5539;
+    --admin-secondary: #7b6a58;
+    --admin-accent: #dec0ad;
+    --page-bg: rgba(127, 85, 57, 0.08);
+}
+
+/* Apply theme to sidebar - MOST IMPORTANT */
+.sidebar {
+    background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 100%) !important;
+    color: white !important;
+    border-right-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.sidebar-top .brand {
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+.sidebar-top .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.sidebar-nav {
+    gap: 8px;
+}
+
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(90deg, var(--admin-accent) 0%, var(--admin-accent) 100%) !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.logout-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.logout-link:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+}
+
+/* Apply theme to primary buttons */
+.btn-primary {
+    background-color: var(--admin-primary) !important;
+    border-color: var(--admin-primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--admin-secondary) !important;
+    border-color: var(--admin-secondary) !important;
+}
+
+/* Apply theme to badges */
+.badge.bg-primary {
+    background-color: var(--admin-primary) !important;
+}
+
+/* Apply theme to card headers */
+.card-header {
+    border-bottom: 2px solid var(--admin-accent) !important;
+}
+
+.card-header.bg-light {
+    background-color: var(--admin-accent) !important;
+    color: #000 !important;
+    font-weight: 500 !important;
+}
+
+/* Apply theme to table headers */
+.table-light,
+.table thead th {
+    background-color: var(--admin-accent) !important;
+    color: #000 !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(222, 192, 173, 0.3) !important;
+}
+
+/* Apply theme to form elements */
+.form-check-input:checked {
+    background-color: var(--admin-primary) !important;
+    border-color: var(--admin-primary) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--admin-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(127, 85, 57, 0.25) !important;
+}
+
+/* Apply theme to page background */
+body.page-bg {
+    background-color: var(--page-bg) !important;
+}
+
+main {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, var(--page-bg) 100%) !important;
+}
+
+/* Apply theme to progress bars */
+.progress-bar {
+    background-color: var(--admin-primary) !important;
+}
+
+/* Apply theme to alerts */
+.alert-light {
+    background-color: var(--admin-accent) !important;
+    border-color: var(--admin-primary) !important;
+    color: #000 !important;
+}
+
+/* Active nav link in pages */
+.nav-link.active {
+    background-color: var(--admin-accent) !important;
+    color: #000 !important;
+}
+
+/* Success and info colors */
+.btn-success {
+    background-color: #28a745 !important;
+}
+
+.btn-success:hover {
+    background-color: #218838 !important;
+}
