@@ -1,0 +1,23 @@
+-- Creates the expresso database (if missing), creates a users table, and inserts the sample rows.
+-- This patches the "Table 'expresso.users' doesn't exist" error by ensuring the table exists
+-- and then performs the INSERT (no trailing commas).
+
+CREATE DATABASE IF NOT EXISTS `expresso` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `expresso`;
+
+-- Create users table (safe if it already exists)
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `username` VARCHAR(100) NOT NULL UNIQUE,
+  `email` VARCHAR(255) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `user_type` ENUM('customer','admin') NOT NULL DEFAULT 'customer',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert the sample users (ensure there is no trailing comma)
+INSERT INTO `users` (`username`, `email`, `password`, `user_type`) VALUES
+  ('Mariel Deuda', 'mariel@gmail.com', '$2y$10$dummyhash', 'customer'),
+  ('Celeste Moneda', 'celes@gmail.com', '$2y$10$dummyhash', 'customer'),
+  ('Rejie Rosario', 'rejie@gmail.com', '$2y$10$dummyhash', 'customer');

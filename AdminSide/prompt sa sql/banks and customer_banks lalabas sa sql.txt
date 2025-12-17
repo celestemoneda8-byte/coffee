@@ -1,0 +1,42 @@
+-- Create a database and two tables for storing admin-added payment banks
+-- and customer bank accounts (bank info).
+-- Run these in your MySQL / MariaDB (phpMyAdmin / CLI). Adjust DB name as needed.
+
+CREATE DATABASE IF NOT EXISTS expresso CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE expresso;
+
+-- Banks that admin can add as payment options
+CREATE TABLE IF NOT EXISTS banks (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,           -- e.g. "BPI", "BDO"
+  account_name VARCHAR(150) DEFAULT NULL, -- descriptive name (optional)
+  account_number VARCHAR(60) DEFAULT NULL,
+  bank_code VARCHAR(60) DEFAULT NULL,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Customer bank accounts (customers' bank details)
+CREATE TABLE IF NOT EXISTS customer_banks (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_name VARCHAR(150) NOT NULL,  -- e.g. "Mariel Dueda"
+  bank_name VARCHAR(150) NOT NULL,      -- bank display name (can be chosen from banks)
+  account_name VARCHAR(150) NOT NULL,
+  account_number VARCHAR(60) NOT NULL,
+  contact VARCHAR(100) DEFAULT NULL,
+  created_by VARCHAR(100) DEFAULT NULL, -- admin username who added (optional)
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert a few initial admin banks (optional)
+INSERT INTO banks (name, account_name, account_number, bank_code, is_active)
+VALUES
+  ('BPI', 'EXpresso Main', '1234567890', 'BPI001', 1),
+  ('BDO', 'EXpresso BDO', '0987654321', 'BDO001', 1);
+
+-- Insert the requested sample customer data (Mariel Dueda, Celeste Moneda, Rejie Rosario)
+INSERT INTO customer_banks (customer_name, bank_name, account_name, account_number, contact, created_by)
+VALUES
+  ('Mariel Dueda', 'BPI', 'Mariel Dueda', '1122334455', '09171234567', 'admin'),
+  ('Celeste Moneda', 'BDO', 'Celeste Moneda', '2233445566', '09172345678', 'admin'),
+  ('Rejie Rosario', 'BPI', 'Rejie Rosario', '3344556677', '09173456789', 'admin');

@@ -1,0 +1,2 @@
+ALTER TABLE payment_methods
+ADD COLUMN is_displayed_to_customer TINYINT(1) DEFAULT 0;
